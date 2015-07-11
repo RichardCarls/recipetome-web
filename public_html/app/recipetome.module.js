@@ -8,6 +8,7 @@
     .module('recipetome', [
       'ui.bootstrap',
       'recipetome.welcome',
+      'recipetome.signup',
     ]);
 
 })(angular);
