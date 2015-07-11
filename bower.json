@@ -1,0 +1,26 @@
+{
+  "name": "recipetome",
+  "version": "0.1.0",
+  "homepage": "https://github.com/RichardCarls/recipetome-web",
+  "authors": [
+    "Richard Carls <richard.j.carls@gmail.com>"
+  ],
+  "description": "Recipe management app",
+  "main": "app/recipetome.module.js",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.2",
+    "angular-bootstrap": "~0.13.0",
+    "bootstrap": "~3.3.5"
+  }
+}

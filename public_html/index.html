@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="recipetome">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
     <title>Recipe Tome</title>
+
+    <link rel="stylesheet" type="text/css" href="asset/style/recipetome.css" />
 
     <!-- HTML5 Shim -->
     <!--[if lt IE 9]>
@@ -12,9 +14,48 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body ng-controller="RecipeTomeController">
+    <header class="navbar navbar-default navbar-static-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">Recipe Tome</a>
+          </div>
+          <nav class="navbar-right">
+            <ul class="nav navbar-nav">
+              <li><a href="/">Home</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
 
-    <h1>Hello world!</h1>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>{{app.greeting.headline}}</h1>
+        <p class="lead">{{app.greeting.lead}}</p>
+        <a class="btn btn-primary btn-lg" href="#">Sign up now to get started</a>
+      </div>
+    </div>
 
+    <footer>
+      <div class="container">
+        <p class="text-center">
+          <span ng-bind-html="app.inlineTemplates.copyright"></span>
+        </p>
+        <p class="text-center">
+          <span ng-bind-html="app.inlineTemplates.license"></span>
+        </p>
+        <p class="text-center">
+          <span>Powered by </span>
+          <span ng-repeat="link in app.inlineTemplates.techList" ng-bind-html="link"></span>
+        </p>
+      </div>
+    </footer>
+
+    <script type="text/javascript" src="vendor/angular/angular.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+    <script type="text/javascript" src="recipetome.js"></script>
   </body>
 </html>
