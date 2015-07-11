@@ -1,6 +1,7 @@
 /**
- * Recipe Tome application module
- * @namespace RecipeTome
+ * Recipe Tome application controller
+ * @namespace RecipeTome/Controller
+ * @memberof RecipeTome
  */
 ;(function(angular) {
 
@@ -10,10 +11,6 @@
 
   function RecipeTomeController($scope, $sce) {
     $scope.app = {
-      greeting: {
-        headline: 'Your Personal Recipe Database',
-        lead: 'Recipe Tome let\'s you create and manage recipes.',
-      },
       inlineTemplates: {
         copyright: $sce.trustAsHtml('Recipe Tome v0.1.0 &nbsp;|&nbsp; &copy; 2015 <a href="http://www.richardcarls.com">Richard Carls</a>'),
         license: $sce.trustAsHtml('Code licensed under <a href="https://github.com/RichardCarls/recipetome-web/blob/master/LICENSE">MIT</a> License'),

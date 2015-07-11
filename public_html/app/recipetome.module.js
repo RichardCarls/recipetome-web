@@ -5,6 +5,9 @@
 ;(function(angular) {
 
   angular
-    .module('recipetome', ['ui.bootstrap']);
+    .module('recipetome', [
+      'ui.bootstrap',
+      'recipetome.welcome',
+    ]);
 
 })(angular);

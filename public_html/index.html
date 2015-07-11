@@ -19,24 +19,18 @@
       <div class="navbar-inner">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="/">Recipe Tome</a>
+            <a class="navbar-brand" ui-sref="welcome">Recipe Tome</a>
           </div>
           <nav class="navbar-right">
             <ul class="nav navbar-nav">
-              <li><a href="/">Home</a></li>
+              <li><a ui-sref="welcome">Home</a></li>
             </ul>
           </nav>
         </div>
       </div>
     </header>
 
-    <div class="jumbotron">
-      <div class="container">
-        <h1>{{app.greeting.headline}}</h1>
-        <p class="lead">{{app.greeting.lead}}</p>
-        <a class="btn btn-primary btn-lg" href="#">Sign up now to get started</a>
-      </div>
-    </div>
+    <div ui-view></div>
 
     <footer>
       <div class="container">
@@ -55,6 +49,7 @@
 
     <script type="text/javascript" src="vendor/angular/angular.min.js"></script>
     <script type="text/javascript" src="vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-ui-router/angular-ui-router.min.js"></script>
 
     <script type="text/javascript" src="recipetome.js"></script>
   </body>

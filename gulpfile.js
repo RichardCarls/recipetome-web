@@ -21,6 +21,8 @@ gulp.task('vendorCopy', function() {
     .pipe(gulp.dest(config.vendorDir + '/angular'));
   gulp.src(config.bowerDir + '/angular-bootstrap/ui-bootstrap-tpls.min.js')
     .pipe(gulp.dest(config.vendorDir + '/angular-bootstrap'));
+  gulp.src(config.bowerDir + '/angular-ui-router/release/angular-ui-router.min.js')
+    .pipe(gulp.dest(config.vendorDir + '/angular-ui-router'));
 });
 
 gulp.task('appConcat', function() {
