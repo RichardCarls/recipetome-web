@@ -11,7 +11,7 @@
   angular
     .module('recipetome.signup', [
       'ui.bootstrap',
-      'ui.router',
+      'ngRoute',
     ]);
 
 })(angular);

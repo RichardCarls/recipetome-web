@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="recipetome">
   <head>
+    <base href="/" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
@@ -19,18 +20,20 @@
       <div class="navbar-inner">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" ui-sref="welcome">Recipe Tome</a>
+            <a class="navbar-brand" href="#/">Recipe Tome</a>
           </div>
           <nav class="navbar-right">
             <ul class="nav navbar-nav">
-              <li><a ui-sref="welcome">Home</a></li>
+              <li><a href="#/">Home</a></li>
+              <li><a href="#/signup">Sign up</a></li>
+              <li><a href="#/login">Log in</a></li>
             </ul>
           </nav>
         </div>
       </div>
     </header>
 
-    <div ui-view></div>
+    <div ng-view></div>
 
     <footer>
       <div class="container">
@@ -49,7 +52,8 @@
 
     <script type="text/javascript" src="vendor/angular/angular.min.js"></script>
     <script type="text/javascript" src="vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script type="text/javascript" src="vendor/angular-ui-router/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-jwt/angular-jwt.min.js"></script>
 
     <script type="text/javascript" src="recipetome.js"></script>
   </body>

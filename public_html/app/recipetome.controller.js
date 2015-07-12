@@ -9,7 +9,7 @@
     .module('recipetome')
       .controller('RecipeTomeController', RecipeTomeController);
 
-  function RecipeTomeController($scope, $sce) {
+  function RecipeTomeController($scope, $sce, AuthService) {
     $scope.app = {
       inlineTemplates: {
         copyright: $sce.trustAsHtml('Recipe Tome v0.1.0 &nbsp;|&nbsp; &copy; 2015 <a href="http://www.richardcarls.com">Richard Carls</a>'),

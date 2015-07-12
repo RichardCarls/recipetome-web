@@ -10,15 +10,14 @@
     .module('recipetome.welcome')
       .config(WelcomeRoutesConfig);
 
-  function WelcomeRoutesConfig($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/');
-
-    $stateProvider
-      .state('welcome', {
-        url: '/',
+  function WelcomeRoutesConfig($routeProvider, $locationProvider) {
+    $routeProvider
+      .when('/', {
         templateUrl: 'app/welcome/welcome.view.html',
         controller: 'WelcomeController',
-      });
+      }).otherwise('/');
+
+    //$locationProvider.html5Mode(true);
   }
 
 })(angular);

@@ -3,44 +3,42 @@
     <div class="col-md-6 col-md-offset-3">
       <div class="panel panel-default">
         <div class="panel-body">
-          <h1 class="text-center">Sign Up</h1>
-          <form name="signupForm" method="post" ng-submit="signup.registerLocal(signup.user)">
+          <h1 class="text-center">Log In</h1>
+          <form name="loginForm" method="post" ng-submit="login.loginLocal(login.user)">
             <div class="form-group has-feedback"
                  ng-class="{
-                   'has-warning': signupForm.email.$dirty,
-                   'has-success': signupForm.email.$valid && signupForm.email.$dirty,
-                   'has-error': signupForm.email.$invalid && signupForm.email.$dirty
+                   'has-warning': loginForm.email.$dirty,
+                   'has-success': loginForm.email.$valid && loginForm.email.$dirty,
+                   'has-error': loginForm.email.$invalid && loginForm.email.$dirty
                  }">
               <input class="form-control input-lg"
                      type="email"
                      name="email"
-                     ng-model="signup.user.email"
+                     ng-model="login.user.email"
                      placeholder="Email"
                      required />
               <span class="form-control-feedback"></span>
               <p class="help-block"
-                 ng-show="signupForm.email.$error.email && !signupForm.email.$focused">Not a valid email.</p>
+                 ng-show="loginForm.email.$error.email && !loginForm.email.$focused">Not a valid email.</p>
             </div>
             <div class="form-group has-feedback">
               <input class="form-control input-lg"
                      type="password"
                      name="password"
-                     ng-model="signup.user.password"
+                     ng-model="login.user.password"
                      placeholder="Password"
                      required />
               <span class="form-control-feedback"></span>
             </div>
             <button class="btn btn-lg btn-block btn-primary"
                     type="submit"
-                    ng-disabled="signupForm.$invalid">Sign Up</button>
-            <br />
-            <p class="text-center text-muted">Already have an account? <a href="#/login">Log in</a>.</p>
+                    ng-disabled="loginForm.$invalid">Log In</button>
           </form>
 
           <hr />
           <h4 class="text-center">... or log in using one of these providers</h4>
           <button class="btn btn-block btn-default"
-                  ng-click="signup.authenticate('google')">Log in with Google</button>
+                  ng-click="login.authenticate('google')">Log in with Google</button>
         </div>
       </div>
     </div>
