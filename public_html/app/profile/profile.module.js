@@ -10,8 +10,8 @@
 
   angular
     .module('recipetome.profile', [
+      'ui.router',
       'ui.bootstrap',
-      'ngRoute',
       'services.user',
     ]);
 

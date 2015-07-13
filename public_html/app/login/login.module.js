@@ -10,8 +10,8 @@
 
   angular
     .module('recipetome.login', [
+      'ui.router',
       'ui.bootstrap',
-      'ngRoute',
     ]);
 
 })(angular);

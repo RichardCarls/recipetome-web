@@ -21,8 +21,8 @@ gulp.task('vendorCopy', function() {
     .pipe(gulp.dest(config.vendorDir + '/angular'));
   gulp.src(config.bowerDir + '/angular-bootstrap/ui-bootstrap-tpls.min.js')
     .pipe(gulp.dest(config.vendorDir + '/angular-bootstrap'));
-  gulp.src(config.bowerDir + '/angular-route/angular-route.min.{js,js.map}')
-    .pipe(gulp.dest(config.vendorDir + '/angular-route'));
+  gulp.src(config.bowerDir + '/angular-ui-router/release/angular-ui-router.min.js')
+    .pipe(gulp.dest(config.vendorDir + '/angular-ui-router'));
   gulp.src(config.bowerDir + '/angular-jwt/dist/angular-jwt.min.js')
     .pipe(gulp.dest(config.vendorDir + '/angular-jwt'));
 });

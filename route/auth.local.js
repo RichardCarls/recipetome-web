@@ -6,7 +6,6 @@ module.exports = (function() {
 
         appConfig = require('../config/app.js');
 
-
     // local registration endpoint
     router.post('/register', doLocalRegistration);
 
@@ -18,13 +17,20 @@ module.exports = (function() {
         .findOne({
           email: request.body.email,
         }, function(error, user) {
-          if (error) { throw error; }
+          if (error) {
+            return response
+              .status(500)
+              .send({
+                message: 'Registration failed: Database error.',
+              });
+          }
 
           if (user) {
-            response.json({
-              success: false,
-              message: 'Registration failed: User with that email already exists. Did you already register?',
-            });
+            return response
+              .status(409)
+              .send({
+                message: 'Registration failed: User with that email already exists. Did you already register?',
+              });
           } else {
             var newUser = new User();
 
@@ -33,13 +39,31 @@ module.exports = (function() {
             newUser.password = newUser.generateHash(request.body.password);
 
             newUser.save(function(error) {
-              if (error) { throw error; }
+              if (error) {
+                return response
+                  .status(500)
+                  .send({
+                    message: 'Registration failed: Database error.',
+                  });
+              }
 
-              var token = jwt.sign(newUser, appConfig.secret, { expiresInMinutes: 1440, });
+              // Return an ID token
+              var idPayload = {
+                email: newUser.email,
+                email_verified: newUser.email_verified,
+              };
+              var options = {
+                algorithm: 'RS256',
+                expiresInMinutes: 1440,   // 24 hour expiration
+                audience: appConfig.host + ":" + appConfig.port,
+                subject: newUser.id,
+                issuer: appConfig.host + ":" + appConfig.port + '/',
+              };
+              var idToken = jwt.sign(idPayload, appConfig.secret, options);
               response.json({
-                success: true,
+                user: newUser.id,
                 message: 'Registration successfull.',
-                token: token,
+                id_token: idToken,
               });
             });
           }
@@ -51,25 +75,44 @@ module.exports = (function() {
         .findOne({
           email: request.body.email,
         }, function(error, user) {
-          if (error) { throw error; }
+          if (error) {
+            response
+              .status(500)
+              .send({
+                message: 'Authentication failed: Database error on lookup.',
+              });
+          }
 
           if (!user) {
-            response.json({
-              success: false,
-              message: 'Authentication failed: User not found.',
-            });
+            response
+              .status(404)
+              .send({
+                message: 'Authentication failed: User with that email not found.',
+              });
           } else if (user) {
             if (!user.validPassword(request.body.password)) {
-              response.json({
-                success: false,
-                message: 'Authentication failed: Wrong password.',
-              });
+              response
+                .status(401)
+                .send({
+                  message: 'Authentication failed: Found user with email but password invalid.',
+                });
             } else {
-              var token = jwt.sign(user, appConfig.secret, { expiresInMinutes: 1440, });
+              // Return an ID token
+              var idPayload = {
+                email: user.email,
+                email_verified: user.email_verified,
+              };
+              var options = {
+                expiresInMinutes: 1440,   // 24 hour expiration
+                audience: appConfig.host + ":" + appConfig.port,
+                subject: user.id,
+                issuer: appConfig.host + ":" + appConfig.port + '/',
+              };
+              var idToken = jwt.sign(idPayload, appConfig.secret, options);
               response.json({
-                success: true,
+                user: user.id,
                 message: 'Authentication successfull.',
-                token: token,
+                id_token: idToken,
               });
             }
           }

@@ -9,7 +9,7 @@
     .module('recipetome.login')
       .controller('LoginController', LoginController);
 
-  function LoginController($scope, $location, AuthService, UserService) {
+  function LoginController($scope, $state, AuthService) {
     $scope.login = {
       user: {
         email: '',
@@ -23,9 +23,7 @@
       AuthService
         .doLocalLogin(user)
         .then(function() {
-          if (UserService.getCurrentUser()) {
-            $location.path('/profile');
-          }
+          $state.go('profile');
         });
     }
 

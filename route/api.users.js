@@ -10,19 +10,20 @@ module.exports = (function() {
     router.use('/', authenticateUser);
 
     function authenticateUser(request, response, next) {
-      var token = request.body.token ||
-                  request.query.token ||
+      var id_token = request.body.id_token ||
+                  request.query.id_token ||
                   request.headers['x-access-token'];
 
-      if(token) {
-        jwt.verify(token, appConfig.secret, function(error, decoded) {
+      if(id_token) {
+        jwt.verify(id_token, appConfig.secret, function(error, decoded) {
           if (error) {
-            return respose.json({
-              success: false,
-              message: 'Authentication failed: Failed to authenticate token.',
-            });
+            return response
+              .status(403)
+              .send({
+                message: 'Authentication failed: Invalid Id token.',
+              });
           } else {
-            request.decoded = decoded;
+            request.id_token = id_token;
             next();
           }
         });
@@ -30,8 +31,7 @@ module.exports = (function() {
         return response
           .status(403)
           .send({
-            success: false,
-            message: 'Authentication failed: No token provided.',
+            message: 'Authentication failed: Please send id_token with api requests.',
           });
       }
     }
@@ -42,7 +42,13 @@ module.exports = (function() {
     function getUser(request, response) {
       User
         .findById(request.params.userId, function(error, user) {
-          if (error) { response.send(error); }
+          if (error) {
+            return response
+              .status(500)
+              .send({
+                message: 'Database error.',
+              });
+          }
 
           response.send(user);
         });

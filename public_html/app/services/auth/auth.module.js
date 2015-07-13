@@ -8,9 +8,7 @@
 
   angular
     .module('services.auth', [
-      'ngRoute',
       'angular-jwt',
-      'services.user',
     ]);
 
 })(angular);

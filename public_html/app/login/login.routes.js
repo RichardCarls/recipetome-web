@@ -10,14 +10,13 @@
     .module('recipetome.login')
       .config(LoginRoutesConfig);
 
-  function LoginRoutesConfig($routeProvider, $locationProvider) {
-    $routeProvider
-      .when('/login', {
+  function LoginRoutesConfig($stateProvider) {
+    $stateProvider
+      .state('login', {
+        url: '/login',
         templateUrl: 'app/login/login.view.html',
         controller: 'LoginController',
-      }).otherwise('/');
-
-    //$locationProvider.html5Mode(true);
+      });
   }
 
 })(angular);

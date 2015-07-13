@@ -10,14 +10,18 @@
     .module('recipetome.profile')
       .config(ProfileRoutesConfig);
 
-  function ProfileRoutesConfig($routeProvider, $locationProvider) {
-    $routeProvider
-      .when('/profile', {
+  function ProfileRoutesConfig($stateProvider) {
+    $stateProvider
+      .state('profile', {
+        url: '/profile',
         templateUrl: 'app/profile/profile.view.html',
         controller: 'ProfileController',
-      }).otherwise('/');
-
-    //$locationProvider.html5Mode(true);
+        resolve: {
+          user: function(UserService) {
+            return UserService.getCurrentUser();
+          }
+        }
+      });
   }
 
 })(angular);

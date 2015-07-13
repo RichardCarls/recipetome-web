@@ -10,14 +10,13 @@
     .module('recipetome.signup')
       .config(SignUpRoutesConfig);
 
-  function SignUpRoutesConfig($routeProvider, $locationProvider) {
-    $routeProvider
-      .when('/signup', {
+  function SignUpRoutesConfig($stateProvider) {
+    $stateProvider
+      .state('signup', {
+        url: '/signup',
         templateUrl: 'app/signup/signup.view.html',
         controller: 'SignUpController',
-      }).otherwise('/');
-
-    //$locationProvider.html5Mode(true);
+      });
   }
 
 })(angular);

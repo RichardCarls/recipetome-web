@@ -8,39 +8,54 @@
 
   angular
     .module('services.auth')
-      .service('AuthService', AuthService);
+      .factory('AuthService', AuthService);
 
-  function AuthService($http, $window, jwtHelper, UserService) {
+  function AuthService($http, $window, $q, jwtHelper) {
 
-    this.doLocalRegistration = function(user) {
+    // TODO: Add verify function
+
+    var service = {
+      doLocalRegistration: doLocalRegistration,
+      doLocalLogin: doLocalLogin,
+      revoke: revoke,
+    };
+
+    return service;
+
+    function doLocalRegistration(user) {
       return $http
         .post('/auth/local/register', user)
         .success(onAuthSuccess)
         .error(onRegistrationError);
-    };
+    }
 
-    this.doLocalLogin = function(user) {
+    function doLocalLogin(user) {
       return $http
         .post('/auth/local', user)
         .success(onAuthSuccess)
         .error(onLoginError);
-    };
+    }
+
+    function revoke() {
+      $window.sessionStorage.removeItem('user_id');
+      $window.sessionStorage.removeItem('id_token');
+    }
 
     function onAuthSuccess(data) {
-      $window.sessionStorage.token = data.token;
-
-      UserService
-        .setCurrentUser(jwtHelper.decodeToken(data.token));
+      if (data.id_token) {
+        $window.sessionStorage.user_id = data.user;
+        $window.sessionStorage.id_token = data.id_token;
+      }
     }
 
     function onRegistrationError(data) {
-      $window.sessionStorage.token = null;
-      
+      revoke();
+
       // TODO: Provide error feedback
     }
 
     function onLoginError(data) {
-      $window.sessionStorage.token = null;
+      revoke();
 
       // TODO: Provide error feedback
     }

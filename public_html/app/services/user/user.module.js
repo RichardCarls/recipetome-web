@@ -7,6 +7,8 @@
 ;(function(angular) {
 
   angular
-    .module('services.user', []);
+    .module('services.user', [
+      'services.auth',
+    ]);
 
 })(angular);

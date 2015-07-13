@@ -9,9 +9,9 @@
     .module('recipetome.profile')
       .controller('ProfileController', ProfileController);
 
-  function ProfileController($scope, UserService) {
+  function ProfileController($scope, UserService, user) {
     $scope.profile = {
-      userProfile: UserService.getUserProfile(),
+      user: user,
     };
   }
 

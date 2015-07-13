@@ -10,32 +10,53 @@
     .module('services.user')
       .factory('UserService', UserService);
 
-  function UserService($http, $window) {
+  function UserService($http, $window, $q, AuthService) {
     var _currentUser = null;
 
-    function getCurrentUser() {
-      return _currentUser;
-    }
-
-    function setCurrentUser(user) {
-      _currentUser = user;
-    }
-
-    function getUserProfile() {
-      $http.get('http://localhost:3000/api/v1/user/' + _currentUser._id, {
-        headers: {
-          'x-access-token': $window.sessionStorage.token,
-        }
-      }).success(function(data) {
-        return data;
-      });
-    }
-
-    return {
+    var service = {
+      isLoggedIn: isLoggedIn,
       getCurrentUser: getCurrentUser,
-      setCurrentUser: setCurrentUser,
-      getUserProfile: getUserProfile,
+      logout: logout,
     };
+
+    return service;
+
+    function isLoggedIn() {
+      return _currentUser ? true : false;
+    }
+
+    function getCurrentUser() {
+      var deferred = $q.defer();
+
+      if (_currentUser) {
+        deferred.resolve(_currentUser);
+      }
+
+      // TODO: Implement verification in AuthService and call here
+      if ($window.sessionStorage.user_id && $window.sessionStorage.id_token) {
+        $http.get('http://localhost:3000/api/v1/user/' + $window.sessionStorage.user_id, {
+          headers: {
+            'x-access-token': $window.sessionStorage.id_token,
+          }
+        }).success(function(data) {
+          _currentUser = data;
+          deferred.resolve(_currentUser);
+        }).error(function() {
+          deferred.reject(null);
+        });
+      } else {
+        deferred.reject(null);
+      }
+
+      return deferred.promise;
+    }
+
+    function logout() {
+      AuthService.revoke();
+      _currentUser = null;
+      isLoggedIn = false;
+    }
+
   }
 
 })(angular);
