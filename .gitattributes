@@ -2,5 +2,5 @@
 public_html/app/*.js liguist-language=javascript
 public_html/asset/style/*.less linguist-language=less
 
-public_html/asset/style/style.css linguist-vendored
+public_html/asset/style/recipetome.css linguist-vendored
 public_html/vendor/* linguist-vendored
