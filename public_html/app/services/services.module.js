@@ -10,6 +10,7 @@
     .module('recipetome.services', [
       'services.auth',
       'services.user',
+      'services.recipe',
     ]);
 
 })(angular);

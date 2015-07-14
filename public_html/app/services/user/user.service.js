@@ -33,8 +33,8 @@
       }
 
       // TODO: Implement verification in AuthService and call here
-      if ($window.sessionStorage.user_id && $window.sessionStorage.id_token) {
-        $http.get('http://localhost:3000/api/v1/user/' + $window.sessionStorage.user_id, {
+      if ($window.sessionStorage.id_token) {
+        $http.get('/api/user/', {
           headers: {
             'x-access-token': $window.sessionStorage.id_token,
           }
@@ -54,7 +54,6 @@
     function logout() {
       AuthService.revoke();
       _currentUser = null;
-      isLoggedIn = false;
     }
 
   }

@@ -9,6 +9,7 @@
   angular
     .module('recipetome.components', [
       'components.usermenu',
+      'components.recipe',
     ]);
 
 })(angular);

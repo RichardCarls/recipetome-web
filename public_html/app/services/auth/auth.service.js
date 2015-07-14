@@ -37,13 +37,11 @@
     }
 
     function revoke() {
-      $window.sessionStorage.removeItem('user_id');
       $window.sessionStorage.removeItem('id_token');
     }
 
     function onAuthSuccess(data) {
       if (data.id_token) {
-        $window.sessionStorage.user_id = data.user;
         $window.sessionStorage.id_token = data.id_token;
       }
     }

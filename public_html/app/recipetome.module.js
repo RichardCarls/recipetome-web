@@ -14,6 +14,7 @@
       'recipetome.signup',
       'recipetome.login',
       'recipetome.profile',
+      'recipetome.recipes',
     ]);
 
 })(angular);

@@ -1,47 +1,24 @@
 module.exports = (function() {
     'use strict';
     var router = require('express').Router(),
-        User = require('../model/user.js'),
         jwt = require('jsonwebtoken'),
+        User = require('../model/user.js');
 
-        appConfig = require('../config/app.js');
+    router.use('/', getUserId);
 
+    function getUserId(request, response, next) {
+      // TODO: error handling
+      request.user_id = jwt.decode(request.id_token).sub;
 
-    router.use('/', authenticateUser);
-
-    function authenticateUser(request, response, next) {
-      var id_token = request.body.id_token ||
-                  request.query.id_token ||
-                  request.headers['x-access-token'];
-
-      if(id_token) {
-        jwt.verify(id_token, appConfig.secret, function(error, decoded) {
-          if (error) {
-            return response
-              .status(403)
-              .send({
-                message: 'Authentication failed: Invalid Id token.',
-              });
-          } else {
-            request.id_token = id_token;
-            next();
-          }
-        });
-      } else {
-        return response
-          .status(403)
-          .send({
-            message: 'Authentication failed: Please send id_token with api requests.',
-          });
-      }
+      next();
     }
 
     // Get user
-    router.get('/:userId', getUser);
+    router.get('/', getUser);
 
     function getUser(request, response) {
       User
-        .findById(request.params.userId, function(error, user) {
+        .findById(request.user_id, function(error, user) {
           if (error) {
             return response
               .status(500)
@@ -53,6 +30,9 @@ module.exports = (function() {
           response.send(user);
         });
     }
+
+    // Recipe resource
+    router.use('/recipes', require('./api.recipes.js'));
 
     return router;
 })();

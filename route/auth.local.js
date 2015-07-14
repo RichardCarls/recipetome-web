@@ -61,7 +61,6 @@ module.exports = (function() {
               };
               var idToken = jwt.sign(idPayload, appConfig.secret, options);
               response.json({
-                user: newUser.id,
                 message: 'Registration successfull.',
                 id_token: idToken,
               });

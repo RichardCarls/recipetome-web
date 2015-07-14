@@ -1,0 +1,42 @@
+<section>
+  <header class="clearfix">
+    <h1 class="pull-left">My Recipes</h2>
+    <form class="form-inline pull-right" name="filterForm">
+      <div class="form-group">
+        <div class="input-group">
+          <label for="category">Filter by Category </label>
+          <select class="form-control"
+                 type="select"
+                 ng-model="filterCategory"
+                 name="category">
+            <option value=""></option>
+            <option ng-repeat="category in categories" value="{{category.slug}}">{{category.label}}</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </header>
+
+  <hr />
+
+  <ul class="row list-unstyled">
+    <li class="col-md-4">
+      <div class="recipe well well-lg text-center">
+        <div style="height: 100%;">
+          <i class="glyphicon glyphicon-plus text-muted"
+             style="font-size: 62px; line-height: 2;"></i>
+          <a class="btn btn-default btn-block" ui-sref="recipes.add">
+            <span>Add New Recipe</span>
+          </a>
+        </div>
+      </div>
+
+    </li>
+    <li class="col-md-4"
+        recipe="recipe"
+        ng-repeat="recipe in recipes
+                   | orderBy: '-created_on'
+                   | filter:{ category: filterCategory }">
+    </li>
+  </ul>
+</section>
