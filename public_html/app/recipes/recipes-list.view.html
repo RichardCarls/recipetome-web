@@ -1,16 +1,17 @@
 <section>
   <header class="clearfix">
-    <h1 class="pull-left">My Recipes</h2>
+    <h1 class="pull-left">My Recipes</h1>
     <form class="form-inline pull-right" name="filterForm">
       <div class="form-group">
         <div class="input-group">
           <label for="category">Filter by Category </label>
           <select class="form-control"
-                 type="select"
-                 ng-model="filterCategory"
-                 name="category">
-            <option value=""></option>
-            <option ng-repeat="category in categories" value="{{category.slug}}">{{category.label}}</option>
+                  type="select"
+                  name="category"
+                  ng-model="vm.categoryFilter"
+                  ng-options="category.slug as category.label
+                              for category in vm.categories">
+            <option value="">(All)</option>
           </select>
         </div>
       </div>
@@ -25,7 +26,7 @@
         <div style="height: 100%;">
           <i class="glyphicon glyphicon-plus text-muted"
              style="font-size: 62px; line-height: 2;"></i>
-          <a class="btn btn-default btn-block" ui-sref="recipes.add">
+          <a class="btn btn-default btn-block" ui-sref="^.create">
             <span>Add New Recipe</span>
           </a>
         </div>
@@ -33,10 +34,11 @@
 
     </li>
     <li class="col-md-4"
-        recipe="recipe"
-        ng-repeat="recipe in recipes
+        ng-repeat="recipe in vm.recipes
                    | orderBy: '-created_on'
-                   | filter:{ category: filterCategory }">
+                   | filter:vm.filter()">
+      <rt-recipe recipe="recipe" format="card">
+      </rt-recipe>
     </li>
   </ul>
 </section>

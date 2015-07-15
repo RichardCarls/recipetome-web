@@ -9,6 +9,8 @@
   angular
     .module('components.recipe', [
       'ui.bootstrap',
+      'ui.router',
+      'services.recipe',
     ]);
 
 })(angular);

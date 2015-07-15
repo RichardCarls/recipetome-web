@@ -39,6 +39,9 @@ module.exports = (function() {
       newRecipe.description = request.body.description;
       newRecipe.thumbnail = request.body.thumbnail;
       newRecipe.category = request.body.category;
+      newRecipe.rating = request.body.rating;
+      newRecipe.cook_time = request.body.cook_time;
+      newRecipe.prep_time = request.body.prep_time;
 
       newRecipe.ingredients = request.body.ingredients;
       newRecipe.steps = request.body.steps;
@@ -52,6 +55,7 @@ module.exports = (function() {
             });
         }
 
+        // With instance _id
         response.json(newRecipe);
       });
     }
@@ -78,36 +82,38 @@ module.exports = (function() {
     router.put('/:recipeId', updateRecipe);
 
     function updateRecipe(request, response) {
+      var updates = {
+        user_id: request.user_id,
+        title: request.body.title,
+        description: request.body.description,
+        thumbnail: request.body.thumbnail,
+        category: request.body.category,
+        rating: request.body.rating,
+        cook_time: request.body.cook_time,
+        prep_time: request.body.prep_time,
+
+        ingredients: request.body.ingredients,
+        steps: request.body.steps,
+      };
+
+
+
       Recipe
-        .findById(request.params.recipeId, function(error, recipe) {
-          if (error) {
-            return response
-              .status(500)
-              .send({
-                message: 'Database error.',
-              });
-          }
-
-          recipe.title = request.body.title;
-          recipe.decription = request.body.decription;
-          recipe.thumbnail = request.body.thumbnail;
-          recipe.category = request.body.category;
-
-          recipe.ingredients = request.body.ingredients;
-          recipe.steps = request.body.steps;
-
-          recipe.save(function(error) {
+        .findOneAndUpdate(
+          { _id: request.params.recipeId, },
+          updates,
+          function(error, recipe) {
             if (error) {
               return response
                 .status(500)
                 .send({
-                  message: 'Database error.',
+                  error: error,
                 });
             }
 
             response.json(recipe);
-          });
-        });
+          }
+        );
     }
 
     // Delete recipe

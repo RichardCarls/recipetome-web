@@ -9,13 +9,26 @@
     .module('recipetome.recipes')
       .controller('RecipesListController', RecipesListController);
 
-  function RecipesListController($scope, RecipeService) {
-    $scope.categories = [
+  function RecipesListController(recipes) {
+    var vm = this;
+
+    vm.recipes = recipes;
+    vm.filter = filter;
+
+    // TODO: Resolve in state routing with RecipeService call
+    vm.categories = [
       { slug: 'beef', label: 'Beef', },
       { slug: 'crap', label: 'Crap', },
     ];
 
-    $scope.recipes = RecipeService.query();
+    function filter() {
+      if (vm.categoryFilter) {
+        return { category: vm.categoryFilter, };
+      }
+
+      return '';
+    }
+
   }
 
 })(angular);

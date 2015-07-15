@@ -1,0 +1,15 @@
+<article class="recipe">
+  <figure class="img-thumbnail">
+    <div class="recipe__thumbnail-wrap">
+      <img class="recipe__thumbnail" ng-src="{{vm.getThumbnail()}}" />
+    </div>
+  </figure>
+  <header>
+    <h3 class="recipe__title">{{vm.recipe.title}}</h3>
+  </header>
+  <p class="recipe__description">{{vm.recipe.description}}</p>
+  <footer class="pull-right">
+    <a class="btn btn-success" ui-sref="^.view({ recipeId: vm.recipe._id })">View</a>
+    <a class="btn btn-warning" ui-sref="^.edit({ recipeId: vm.recipe._id })">Edit</a>
+  </footer>
+</article>

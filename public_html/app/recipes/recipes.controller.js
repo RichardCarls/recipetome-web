@@ -9,8 +9,8 @@
     .module('recipetome.recipes')
       .controller('RecipesController', RecipesController);
 
-  function RecipesController($scope, RecipeService) {
-    //
+  function RecipesController() {
+    var vm = this;
   }
 
 })(angular);

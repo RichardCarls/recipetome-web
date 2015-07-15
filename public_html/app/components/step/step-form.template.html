@@ -1,0 +1,56 @@
+<div>
+  <div class="col-md-1">
+
+    <!-- Order Preview -->
+    <h4><strong ng-bind="vm.step.order"></strong></h4>
+
+    <!-- Oreder (required, hidden) -->
+    <input type="hidden"
+           name="order"
+           ng-model="vm.step.order"
+           required />
+
+  </div>
+
+  <div class="col-md-11">
+    <div class="form-group">
+
+      <!-- Directions (required) -->
+      <textarea class="form-control"
+             name="directions"
+             ng-model="vm.step.directions"
+             placeholder="Directions"
+             required></textarea>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-9">
+        <div class="form-group">
+
+          <!-- Summary -->
+          <input class="form-control input-sm"
+                 type="text"
+                 name="category"
+                 ng-model="vm.step.summary"
+                 placeholder="Summary" />
+
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+
+          <!-- Remove -->
+          <button class="btn btn-danger btn-sm btn-block"
+                  type="button"
+                  ng-click="vm.removeStep(step)">
+            <i class="glyphicon glyphicon-minus" aria-hidden="true"></i>
+            <span> Remove</span>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

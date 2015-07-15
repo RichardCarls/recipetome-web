@@ -1,0 +1,186 @@
+<form name="form" method="post" ng-submit="vm.saveRecipe()">
+  <legend>
+    <h1>New Recipe</h1>
+  </legend>
+  <div class="row">
+    <div class="col-md-5 well">
+
+      <div class="form-group">
+        <fieldset>
+
+          <!-- Thumbnail Preview -->
+          <img class="img-thumbnail center-block"
+               ng-src="{{vm.getThumbnail()}}" />
+
+          <br />
+
+          <!-- Thumbnail -->
+          <div class="input-group">
+            <input class="form-control"
+                   type="url"
+                   name="thumbnail"
+                   ng-model="vm.recipe.thumbnail"
+                   placeholder="Picture Uri" />
+            <span class="input-group-btn">
+              <button class="btn btn-default btn-block"
+                      ng-click="uploadPicture()">Upload</button>
+            </span>
+          </div>
+
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="col-md-7">
+      <fieldset>
+
+        <!-- Title (required) -->
+        <div class="form-group">
+          <input class="form-control input-lg"
+                 type="text"
+                 name="title"
+                 ng-model="vm.recipe.title"
+                 placeholder="Title"
+                 required autofocus />
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <textarea class="form-control input-lg"
+                 type="text"
+                 name="description"
+                 ng-model="vm.recipe.description"
+                 placeholder="Description"></textarea>
+        </div>
+
+        <div class="row">
+          <div class="col-md-7">
+
+            <!-- Category -->
+            <div class="form-group">
+              <input class="form-control input-lg"
+                     type="text"
+                     name="category"
+                     ng-model="vm.recipe.category"
+                     placeholder="Category"
+                     required />
+            </div>
+
+          </div>
+          <div class="col-md-5">
+
+            <!-- Rating -->
+            <div class="form-group">
+              <span class="form-control input-lg">Rating:&nbsp;
+                <rating ng-model="vm.recipe.rating"
+                        max="{{vm.rating.max}}"></rating></span>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+
+            <!-- Prep Time -->
+            <div class="form-group">
+              <label for="prep_time">Prep Time</label>
+              <input class="form-control input-lg"
+                     type="number"
+                     name="prep_time"
+                     ng-model="vm.recipe.prep_time" />
+            </div>
+
+          </div>
+          <div class="col-md-6">
+
+            <!-- Cook Time -->
+            <div class="form-group">
+              <label for="cook_time">Cook Time</label>
+              <input class="form-control input-lg"
+                     type="number"
+                     name="cook_time"
+                     ng-model="vm.recipe.cook_time" />
+            </div>
+
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="row">
+    <div class="col-md-5">
+      <fieldset>
+        <legend>
+          <h3>Ingredients</h3>
+        </legend>
+
+        <!-- Ingredients -->
+        <div class="panel panel-default"
+             ng-repeat="ingredient in vm.recipe.ingredients
+                        | orderBy: 'order'">
+          <div class="panel-body row">
+            <rt-ingredient ingredient="ingredient"
+                           format="form"
+                           order="$index + 1"
+                           on-remove="vm.removeIngredient(ingredient)">
+            </rt-ingredient>
+          </div>
+        </div>
+
+        <!-- Add ingredient -->
+        <button class="btn btn-default btn-lg btn-block"
+                type="button"
+                ng-click="vm.addIngredient()">
+          <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+          <span> Add Ingredient</span>
+        </button>
+
+      </fieldset>
+    </div>
+
+    <div class="col-md-7">
+      <fieldset>
+        <legend>
+          <h3>Directions</h3>
+        </legend>
+        <div class="panel panel-default"
+             ng-repeat="step in vm.recipe.steps
+                        | orderBy: 'order'">
+          <div class="panel-body row">
+            <rt-step step="step"
+                     format="form"
+                     order="$index + 1"
+                     on-remove="removeStep(step)">
+            </rt-step>
+          </div>
+        </div>
+
+        <!-- Add direction step -->
+        <button class="btn btn-default btn-lg btn-block"
+                type="button"
+                ng-click="vm.addStep()">
+          <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+          <span> Add Step</span>
+        </button>
+
+      </fieldset>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="text-right">
+
+    <!-- Submit -->
+    <button class="btn btn-lg btn-success"
+            type="submit"
+            ng-disabled="form.$invalid">Save</button>
+
+    <!-- Cancel -->
+    <a class="btn btn-lg btn-warning" ui-sref="^.list">Cancel</a>
+  </div>
+</form>

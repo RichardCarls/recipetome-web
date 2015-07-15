@@ -10,6 +10,8 @@
     .module('recipetome.components', [
       'components.usermenu',
       'components.recipe',
+      'components.ingredient',
+      'components.step',
     ]);
 
 })(angular);

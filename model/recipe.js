@@ -16,16 +16,17 @@ var RecipeStep = mongoose.Schema({
 });
 
 var schema = mongoose.Schema({
-  user_id: { type: ObjectId, ref: 'User', required: true, },
+  user_id: { type: ObjectId, ref: 'User', required: true, },  //Required
   title: { type: String, required: true, trim: true, },  //Required
   description: { type: String, trim: true, },
   thumbnail: { type: String, trim: true, },
-  rating: { type: Number, min: 0, max: 5, },
+  rating: { type: Number, min: 0, max: 5, default: 0, },
   prep_time: { type: Number, min: 1, },
   cook_time: { type: Number, min: 1, },
-  created_on: { type: Date, },
+  created_on: { type: Date, required: true, },  //Required
   updated_on: { type: Date, },
-  category: { type: String, required: true, trim: true, default: 'none' },  //Required
+  // TODO: Change to RecipeCategory
+  category: { type: String, trim: true, default: 'Uncategorized' },
   ingredients: [RecipeIngredient],
   steps: [RecipeStep],
 });
