@@ -39,6 +39,7 @@ app
   .use(express.static(__dirname + '/public_html'))
   .use('/auth/local', require('./route/auth.local.js'))
   .use('/api', require('./route/api.js'))
+  .use('/userdata', require('./route/userdata.js'))
   .use('/', require('./route/default.js'));
 
 app.listen(appConfig.port);

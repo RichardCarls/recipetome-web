@@ -6,25 +6,44 @@
     <div class="col-md-5 well">
 
       <div class="form-group">
-        <fieldset>
+        <fieldset flow-init="{
+                    target: '/userdata/upload',
+                    uploadMethod: 'POST',
+                    testChunks: false,
+                  }"
+                  flow-files-submitted="$flow.upload()"
+                  flow-file-success="vm.onPictureUpload($file, $message, $flow)">
 
           <!-- Thumbnail Preview -->
-          <img class="img-thumbnail center-block"
-               ng-src="{{vm.getThumbnail()}}" />
+          <div class="text-center">
+            <figure class="img-thumbnail">
+              <div class="recipe__thumbnail-wrap">
+                <img class="recipe__thumbnail"
+                     ng-hide="$flow.files.length"
+                     ng-src="{{vm.getThumbnail()}}" />
+                <img class="recipe__thumbnail"
+                     ng-show="$flow.files.length"
+                     flow-img="$flow.files[0]" />
+              </div>
+            </figure>
+          </div>
 
           <br />
 
           <!-- Thumbnail -->
-          <div class="input-group">
-            <input class="form-control"
-                   type="url"
-                   name="thumbnail"
-                   ng-model="vm.recipe.thumbnail"
-                   placeholder="Picture Uri" />
-            <span class="input-group-btn">
-              <button class="btn btn-default btn-block"
-                      ng-click="uploadPicture()">Upload</button>
-            </span>
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon">File</span>
+              <input class="form-control input-lg"
+                     type="text"
+                     flow-btn flow-attrs="{accept:'image/*'}"
+                     flow-drop
+                     placeholder="Drop here or click to select file"
+                     readonly />
+              <input type="hidden"
+                     name="thumbnail"
+                     ng-model="vm.recipe.thumbnail" />
+            </div>
           </div>
 
         </fieldset>
@@ -58,12 +77,13 @@
 
             <!-- Category -->
             <div class="form-group">
+              <label for="category">Category</label>
               <input class="form-control input-lg"
                      type="text"
                      name="category"
-                     ng-model="vm.recipe.category"
-                     placeholder="Category"
-                     required />
+                     ng-model="vm.recipe.category.label"
+                     ng-change="vm.generateCategorySlug()"
+                     placeholder="Category" />
             </div>
 
           </div>
@@ -71,36 +91,61 @@
 
             <!-- Rating -->
             <div class="form-group">
-              <span class="form-control input-lg">Rating:&nbsp;
-                <rating ng-model="vm.recipe.rating"
-                        max="{{vm.rating.max}}"></rating></span>
+              <label>Rating</label>
+              <span class="form-control input-lg">Select:&nbsp;
+              <rating ng-model="vm.recipe.rating"
+                      max="{{vm.rating.max}}"></rating></span>
             </div>
 
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
 
             <!-- Prep Time -->
             <div class="form-group">
               <label for="prep_time">Prep Time</label>
-              <input class="form-control input-lg"
-                     type="number"
-                     name="prep_time"
-                     ng-model="vm.recipe.prep_time" />
+              <div class="input-group">
+                <input class="form-control"
+                       type="number"
+                       name="prep_time"
+                       step="any"
+                       min="1"
+                       ng-model="vm.recipe.prep_time" />
+                <span class="input-group-addon">minutes</span>
+              </div>
             </div>
 
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
 
             <!-- Cook Time -->
             <div class="form-group">
-              <label for="cook_time">Cook Time</label>
-              <input class="form-control input-lg"
+              <label for="prep_time">Cook Time</label>
+              <div class="input-group">
+                <input class="form-control"
+                       type="number"
+                       name="cook_time"
+                       step="any"
+                       min="1"
+                       ng-model="vm.recipe.cook_time" />
+                <span class="input-group-addon">minutes</span>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-4">
+
+            <!-- Servings -->
+            <div class="form-group">
+              <label for="prep_time">Servings</label>
+              <input class="form-control"
                      type="number"
-                     name="cook_time"
-                     ng-model="vm.recipe.cook_time" />
+                     name="yield_qty"
+                     min="1"
+                     step="1"
+                     ng-model="vm.recipe.yield_qty" />
             </div>
 
           </div>

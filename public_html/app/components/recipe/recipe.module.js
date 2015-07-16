@@ -10,6 +10,8 @@
     .module('components.recipe', [
       'ui.bootstrap',
       'ui.router',
+      'slugifier',
+      'flow',
       'services.recipe',
     ]);
 

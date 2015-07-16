@@ -27,6 +27,10 @@ gulp.task('vendorCopy', function() {
     .pipe(gulp.dest(config.vendorDir + '/angular-resource'));
   gulp.src(config.bowerDir + '/angular-jwt/dist/angular-jwt.min.js')
     .pipe(gulp.dest(config.vendorDir + '/angular-jwt'));
+  gulp.src(config.bowerDir + '/angular-slugify/angular-slugify.js')
+    .pipe(gulp.dest(config.vendorDir + '/angular-slugify'));
+  gulp.src(config.bowerDir + '/ng-flow/dist/ng-flow-standalone.min.js')
+    .pipe(gulp.dest(config.vendorDir + '/ng-flow'));
 });
 
 gulp.task('appConcat', function() {

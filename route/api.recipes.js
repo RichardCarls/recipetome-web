@@ -1,6 +1,8 @@
 module.exports = (function() {
     'use strict';
     var router = require('express').Router(),
+        path = require('path'),
+        fs = require('fs'),
         Recipe = require('../model/recipe.js');
 
     // Query recipes
@@ -21,11 +23,11 @@ module.exports = (function() {
             return response
               .status(500)
               .send({
-                message: 'Database error.',
+                error: error,
               });
           }
 
-          response.send(recipes);
+          response.json(recipes);
         });
     }
 
@@ -40,8 +42,16 @@ module.exports = (function() {
       newRecipe.thumbnail = request.body.thumbnail;
       newRecipe.category = request.body.category;
       newRecipe.rating = request.body.rating;
-      newRecipe.cook_time = request.body.cook_time;
-      newRecipe.prep_time = request.body.prep_time;
+
+      if (request.body.cook_time) {
+        newRecipe.cook_time = request.body.cook_time;
+      }
+      if (request.body.prep_time) {
+        newRecipe.prep_time = request.body.prep_time;
+      }
+      if (request.body.yield_qty) {
+        newRecipe.yield_qty = request.body.yield_qty;
+      }
 
       newRecipe.ingredients = request.body.ingredients;
       newRecipe.steps = request.body.steps;
@@ -51,7 +61,7 @@ module.exports = (function() {
           return response
             .status(500)
             .send({
-              message: 'Database error.',
+              error: error,
             });
         }
 
@@ -70,11 +80,11 @@ module.exports = (function() {
             return response
               .status(500)
               .send({
-                message: 'Database error.',
+                error: error,
               });
           }
 
-          response.send(recipe);
+          response.json(recipe);
         });
     }
 
@@ -89,13 +99,20 @@ module.exports = (function() {
         thumbnail: request.body.thumbnail,
         category: request.body.category,
         rating: request.body.rating,
-        cook_time: request.body.cook_time,
-        prep_time: request.body.prep_time,
 
         ingredients: request.body.ingredients,
         steps: request.body.steps,
       };
 
+      if (request.body.cook_time) {
+        updates.cook_time = request.body.cook_time;
+      }
+      if (request.body.prep_time) {
+        updates.prep_time = request.body.prep_time;
+      }
+      if (request.body.yield_qty) {
+        updates.yield_qty = request.body.yield_qty;
+      }
 
 
       Recipe
@@ -121,12 +138,12 @@ module.exports = (function() {
 
     function deleteRecipe(request, response) {
       Recipe
-        .remove({ _id: request.params.recipeId }, function(error, recipe) {
+        .remove({ _id: request.params.recipeId }, function(error) {
           if (error) {
             return response
               .status(500)
               .send({
-                message: 'Database error.',
+                error: error,
               });
           }
         });

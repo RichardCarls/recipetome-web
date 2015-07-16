@@ -21,6 +21,7 @@ module.exports = (function() {
               .status(403)
               .send({
                 message: 'Authentication failed: Invalid Id token.',
+                error: error,
               });
           } else {
             request.id_token = id_token;

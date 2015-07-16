@@ -23,15 +23,16 @@ module.exports = (function() {
             return response
               .status(500)
               .send({
-                message: 'Database error.',
+                error: error,
               });
           }
 
-          response.send(user);
+          response.json(user);
         });
     }
 
     // Recipe resource
+    router.use('/categories', require('./api.categories.js'));
     router.use('/recipes', require('./api.recipes.js'));
 
     return router;

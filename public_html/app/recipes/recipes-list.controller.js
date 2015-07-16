@@ -9,21 +9,17 @@
     .module('recipetome.recipes')
       .controller('RecipesListController', RecipesListController);
 
-  function RecipesListController(recipes) {
+  function RecipesListController(recipes, categories) {
     var vm = this;
 
     vm.recipes = recipes;
     vm.filter = filter;
 
-    // TODO: Resolve in state routing with RecipeService call
-    vm.categories = [
-      { slug: 'beef', label: 'Beef', },
-      { slug: 'crap', label: 'Crap', },
-    ];
+    vm.categories = categories;
 
     function filter() {
       if (vm.categoryFilter) {
-        return { category: vm.categoryFilter, };
+        return { category: { slug: vm.categoryFilter, }, };
       }
 
       return '';

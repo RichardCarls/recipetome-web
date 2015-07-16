@@ -21,7 +21,7 @@ module.exports = (function() {
             return response
               .status(500)
               .send({
-                message: 'Registration failed: Database error.',
+                error: error,
               });
           }
 
@@ -43,7 +43,7 @@ module.exports = (function() {
                 return response
                   .status(500)
                   .send({
-                    message: 'Registration failed: Database error.',
+                    error: error,
                   });
               }
 
@@ -78,7 +78,7 @@ module.exports = (function() {
             response
               .status(500)
               .send({
-                message: 'Authentication failed: Database error on lookup.',
+                error: error,
               });
           }
 

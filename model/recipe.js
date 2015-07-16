@@ -23,10 +23,14 @@ var schema = mongoose.Schema({
   rating: { type: Number, min: 0, max: 5, default: 0, },
   prep_time: { type: Number, min: 1, },
   cook_time: { type: Number, min: 1, },
-  created_on: { type: Date, required: true, },  //Required
+  yield_qty: { type: Number, min: 1, },
+  created_on: { type: Date, },
   updated_on: { type: Date, },
   // TODO: Change to RecipeCategory
-  category: { type: String, trim: true, default: 'Uncategorized' },
+  category: {
+    slug: { type: String, lowercase: true, trim: true, default: 'uncategorized', },
+    label: { type: String, trim: true, default: 'Uncategorized', },
+  },
   ingredients: [RecipeIngredient],
   steps: [RecipeStep],
 });

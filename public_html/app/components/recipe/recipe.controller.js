@@ -10,13 +10,14 @@
     .module('components.recipe')
       .controller('RTRecipeController', RTRecipeController);
 
-  function RTRecipeController($state, RecipeService) {
+  function RTRecipeController($state, $window, RecipeService, Slug) {
     var vm = this;
 
     vm.rating = { max: 5, };
 
     vm.getThumbnail = getThumbnail;
-    vm.uploadPicture = uploadPicture;
+    vm.onPictureUpload = onPictureUpload;
+    vm.generateCategorySlug = generateCategorySlug;
     vm.addIngredient = addIngredient;
     vm.removeIngredient = removeIngredient;
     vm.addStep = addStep;
@@ -32,8 +33,12 @@
       return vm.recipe.thumbnail;
     }
 
-    function uploadPicture() {
-      // TODO: Implement for 0.1.0
+    function onPictureUpload(file, message, flow) {
+      vm.recipe.thumbnail = JSON.parse(message).files[0].url;
+    }
+
+    function generateCategorySlug() {
+      vm.recipe.category.slug = Slug.slugify(vm.recipe.category.label);
     }
 
     function moveIngredient(direction) {

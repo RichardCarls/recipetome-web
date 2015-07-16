@@ -27,6 +27,17 @@
           recipes: function(RecipeService) {
             return RecipeService.query().$promise;
           },
+          categories: function($http, $window) {
+            return $http.get('/api/user/categories', {
+              headers: {
+                'x-access-token': $window.sessionStorage.id_token,
+              }
+            }).then(function(response) {
+              return response.data;
+            }).catch(function() {
+              return [{ slug: '', label: '', }];
+            });
+          },
         },
       })
       .state('recipes.view', {

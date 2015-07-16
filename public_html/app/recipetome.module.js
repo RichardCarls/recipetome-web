@@ -8,6 +8,7 @@
     .module('recipetome', [
       'ui.router',
       'ui.bootstrap',
+      'flow',
       'recipetome.services',
       'recipetome.components',
       'recipetome.welcome',
