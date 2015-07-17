@@ -17,4 +17,11 @@ schema.methods.validPassword = function(password) {
     .compareSync(password, this.password);
 };
 
+schema.methods.toJSON = function() {
+  var json = this.toObject();
+  delete json.password;  // Remove password field
+
+  return json;
+};
+
 module.exports = mongoose.model('User', schema);

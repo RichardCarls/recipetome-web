@@ -31,6 +31,50 @@ module.exports = (function() {
         });
     }
 
+    // Update user
+    router.put('/', updateUser);
+
+    function updateUser(request, response) {
+      User
+        .findById(request.user_id, function(error, user) {
+          if (error) {
+            return response
+              .status(500)
+              .send({
+                error: error,
+              });
+          }
+
+          if (!user.validPassword(request.body.current_password)) {
+            return response
+              .status(401)
+              .send({
+                message: 'Update failed: Invalid password.',
+              });
+          } else {
+            if (request.body.email) {
+              user.email = request.body.email;
+            }
+            if (request.body.password) {
+              user.password = user.generateHash(request.body.password);
+            }
+
+            user.save(function(error) {
+              if (error) {
+                return response
+                  .status(500)
+                  .send({
+                    error: error,
+                  });
+              }
+
+              return response.json(user);
+
+            });
+          }
+        });
+    }
+
     // Recipe resource
     router.use('/categories', require('./api.categories.js'));
     router.use('/recipes', require('./api.recipes.js'));

@@ -1,7 +1,142 @@
 <div class="container">
   <main>
-    <h1>User profile</h1>
-    <p>id: {{profile.user._id}}</p>
-    <p>email: {{profile.user.email}}</p>
+    <header class="row">
+      <div class="col-md-2 col-md-offset-1">
+        <div class="text-center">
+          <figure>
+            <img class="img-circle" ng-src="{{vm.gravatarImage}}" />
+          </figure>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h2>User profile <small>ID: {{::vm.user._id}}</small></h2>
+      </div>
+    </header>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h3>Account Credentials</h3>
+        <hr />
+        <form name="form"
+              ng-submit="vm.updateCredentials(vm.credentials)"
+              ng-init="form.editEmail = false;
+                       form.editPassword = false;"
+              novalidate>
+          <fieldset>
+            <div class="form-group"
+                 ng-class="{
+                   'has-error' : form.email.$invalid
+                   && !form.email.$pristine
+                 }">
+              <label for="email">Email Address</label>
+              <p class="form-control-static"
+                 ng-hide="form.editEmail">
+                 <span ng-bind="vm.user.email"></span>
+                 <button class="btn btn-link"
+                         type="button"
+                         ng-click="form.editEmail = true">Change</button>
+              </p>
+
+              <!-- Change Email -->
+              <input class="form-control"
+                     ng-show="form.editEmail"
+                     type="email"
+                     name="email"
+                     ng-model="vm.credentials.email"
+                     ng-model-options="{ allowInvalid: !form.editEmail }"
+                     placeholder="New Email"
+                     ng-required="form.editEmail" />
+              <p ng-show="form.email.$invalid && !form.email.$pristine"
+                 class="help-block">Enter a valid email.</p>
+
+              <!-- Cancel Email Change -->
+              <button class="btn btn-link pull-right"
+                      type="button"
+                      ng-click="form.editEmail = false"
+                      ng-show="form.editEmail">Cancel</button>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <div class="form-group"
+                 ng-class="{
+                   'has-error' : form.password.$invalid
+                   && !form.password.$pristine
+                 }">
+              <label for="password">Password</label>
+              <p class="form-control-static"
+                 ng-hide="form.editPassword">
+                 <span>(hidden)</span>
+                 <button class="btn btn-link"
+                         type="button"
+                         ng-click="form.editPassword = true">Change</button>
+              </p>
+
+              <!-- New Password -->
+              <input class="form-control"
+                     ng-show="form.editPassword"
+                     type="password"
+                     name="password"
+                     ng-model="vm.credentials.password"
+                     ng-model-options="{ allowInvalid: !form.editPassword }"
+                     placeholder="New Password"
+                     ng-required="form.editPassword" />
+            </div>
+
+            <!-- Password Confirm -->
+            <div class="form-group"
+                 ng-class="{
+                   'has-error' : form.password_confirm.$invalid
+                   && !form.password_confirm.$pristine
+                 }"
+                 ng-show="form.editPassword">
+              <label for="password_confirm">Confirm Password</label>
+              <input class="form-control"
+                     type="password"
+                     name="password_confirm"
+                     ng-model="password_confirm"
+                     ng-model-options="{ allowInvalid: !form.editPassword }"
+                     placeholder="Confirm New Password"
+                     input-match="form.password"
+                     ng-required="form.editPassword" />
+              <p ng-show="form.password_confirm.$invalid
+                          && !form.password_confirm.$pristine"
+                 class="help-block">Password values must match.</p>
+
+                 <!-- Cancel Password Change -->
+                 <button class="btn btn-link pull-right"
+                         type="button"
+                         ng-click="form.editPassword = false"
+                         ng-show="form.editPassword">Cancel</button>
+            </div>
+          </fieldset>
+
+          <!-- Authenticate Changes -->
+          <div class="well" ng-show="form.editEmail || form.editPassword">
+            <div class="form-group"
+                 ng-class="{
+                   'has-error' : form.current_password.$invalid
+                   && !form.current_password.$pristine
+                 }">
+              <label for="current_password">Enter your current password</label>
+              <input class="form-control"
+                     type="password"
+                     name="current_password"
+                     ng-model="vm.credentials.current_password"
+                     placeholder="Current Password"
+                     required />
+              <p ng-show="form.current_password.$invalid && !form.current_password.$pristine"
+                 class="help-block">Your current password is required to change settings.</p>
+            </div>
+
+            <!-- Submit -->
+            <button class="btn btn-warning btn-block"
+                    ng-show="form.editEmail || form.editPassword"
+                    type="submit"
+                    ng-disabled="form.$invalid">Apply Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </main>
 </div>

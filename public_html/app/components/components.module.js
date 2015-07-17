@@ -12,6 +12,7 @@
       'components.recipe',
       'components.ingredient',
       'components.step',
+      'components.inputMatch',
     ]);
 
 })(angular);

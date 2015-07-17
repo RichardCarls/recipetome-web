@@ -16,6 +16,7 @@
         url: '/profile',
         templateUrl: 'app/profile/profile.view.html',
         controller: 'ProfileController',
+        controllerAs: 'vm',
         resolve: {
           user: function(UserService) {
             return UserService.getCurrentUser();

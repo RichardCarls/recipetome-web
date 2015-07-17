@@ -13,6 +13,7 @@
       'ui.router',
       'ui.bootstrap',
       'services.user',
+      'components.inputMatch',
     ]);
 
 })(angular);
