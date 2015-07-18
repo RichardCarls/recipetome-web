@@ -1,15 +1,23 @@
-<article class="recipe">
-  <figure class="img-thumbnail">
-    <div class="recipe__thumbnail-wrap">
-      <img class="recipe__thumbnail" ng-src="{{vm.getThumbnail()}}" />
+<article class="recipe recipe--card">
+  <div class="recipe__thumbnail">
+    <div class="img-thumbnail">
+      <figure class="recipe__thumbnail-wrap">
+        <img class="recipe__thumbnail-img" ng-src="{{vm.getThumbnail()}}" />
+      </figure>
     </div>
-  </figure>
+  </div>
   <header>
     <h3 class="recipe__title">{{vm.recipe.title}}</h3>
   </header>
   <p class="recipe__description">{{vm.recipe.description}}</p>
   <footer class="pull-right">
-    <a class="btn btn-success" ui-sref="^.view({ recipeId: vm.recipe._id })">View</a>
-    <a class="btn btn-warning" ui-sref="^.edit({ recipeId: vm.recipe._id })">Edit</a>
+    <a class="btn btn-success" ui-sref="^.view({ recipeId: vm.recipe._id })">
+      <i class="glyphicon glyphicon-cutlery"></i>
+      <span>View</span>
+    </a>
+    <a class="btn btn-warning" ui-sref="^.edit({ recipeId: vm.recipe._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+      <span>Edit</span>
+    </a>
   </footer>
 </article>

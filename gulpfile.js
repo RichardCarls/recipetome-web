@@ -20,6 +20,10 @@ gulp.task('vendorCopy', function() {
   gulp.src(config.bowerDir + '/cryptojslib/rollups/md5.js')
     .pipe(gulp.dest(config.vendorDir + '/cryptojslib/rollups'));
 
+  // jQuery
+  gulp.src(config.bowerDir + '/masonry/dist/masonry.pkgd.min.js')
+    .pipe(gulp.dest(config.vendorDir + '/masonry'));
+
   // Angular and 3rd party module dependencies
   gulp.src(config.bowerDir + '/angular/angular.min.{js,js.map}')
     .pipe(gulp.dest(config.vendorDir + '/angular'));

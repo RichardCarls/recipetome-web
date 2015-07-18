@@ -6770,35 +6770,17 @@ button.close {
 .panel-title a {
   cursor: pointer;
 }
-.recipe {
-  margin: 10px 0 20px 0;
-  min-height: 280px;
-}
 .recipe__thumbnail-wrap {
-  height: 280px;
-  overflow: hidden;
-  text-align: center;
-}
-.recipe__thumbnail {
   position: relative;
-  left: 100%;
-  margin-left: -200%;
-  max-height: 280px;
-  width: auto;
-}
-.recipe__description {
-  position: relative;
-  line-height: 1.2em;
-  height: 2.4em;
+  width: 100%;
   overflow: hidden;
 }
-.recipe__description::after {
-  content: "";
-  text-align: right;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 70%;
-  height: 1.2em;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0), #ffffff 50%);
+.recipe__thumbnail-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  -ms-interpolation-mode: bicubic;
+}
+.masonry {
+  margin: 10px 0 25px 0;
 }

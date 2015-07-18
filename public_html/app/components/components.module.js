@@ -13,6 +13,7 @@
       'components.ingredient',
       'components.step',
       'components.inputMatch',
+      'components.masonry',
     ]);
 
 })(angular);

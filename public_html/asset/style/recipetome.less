@@ -6,34 +6,27 @@
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 .recipe {
-  margin: 10px 0 20px 0;
-  min-height: 280px;
+  &__thumbnail {
+    &-wrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    &-img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+
+      -ms-interpolation-mode: bicubic;
+    }
+  }
+
+  &__title {
+
+  }
 }
-.recipe__thumbnail-wrap {
-  height: 280px;
-  overflow: hidden;
-  text-align: center;
-}
-.recipe__thumbnail {
-  position: relative;
-  left: 100%;
-  margin-left: -200%;
-  max-height: 280px;
-  width: auto;
-}
-.recipe__description {
-  position: relative;
-  line-height: 1.2em;
-  height: 2.4em;
-  overflow: hidden;
-}
-.recipe__description::after {
-  content: "";
-  text-align: right;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 70%;
-  height: 1.2em;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+
+.masonry {
+  margin: 10px 0 25px 0;
 }

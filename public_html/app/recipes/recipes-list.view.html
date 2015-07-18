@@ -19,25 +19,35 @@
 
   <hr />
 
-  <ul class="row list-unstyled">
-    <li class="col-md-4">
-      <div class="recipe well well-lg text-center">
-        <div style="height: 100%;">
-          <i class="glyphicon glyphicon-plus text-muted"
-             style="font-size: 62px; line-height: 2;"></i>
-          <a class="btn btn-default btn-block" ui-sref="^.create">
-            <span>Add New Recipe</span>
-          </a>
-        </div>
+  <ul class="row list-unstyled"
+      rt-masonry
+      rt-tag="recipeList"
+      rt-watch="filteredRecipes">
+    <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 masonry"
+        rt-masonry-stamp
+        rt-tag="recipeList">
+      <div class="well well-lg text-center">
+        <i class="glyphicon glyphicon-plus text-muted"
+           style="font-size: 62px; line-height: 2;"></i>
+        <a class="btn btn-default btn-block" ui-sref="^.create">
+          <span>Add New Recipe</span>
+        </a>
       </div>
-
     </li>
-    <li class="col-md-4"
+    <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 masonry"
         ng-repeat="recipe in vm.recipes
                    | orderBy: '-created_on'
-                   | filter:vm.filter()">
+                   | filter:{ category: { slug: vm.categoryFilter || undefined, }, }
+                   as filteredRecipes"
+        rt-masonry-item
+        rt-tag="recipeList">
       <rt-recipe recipe="recipe" format="card">
       </rt-recipe>
     </li>
   </ul>
+
+  <!--
+
+  -->
+
 </section>

@@ -13,17 +13,9 @@
     var vm = this;
 
     vm.recipes = recipes;
-    vm.filter = filter;
 
     vm.categories = categories;
-
-    function filter() {
-      if (vm.categoryFilter) {
-        return { category: { slug: vm.categoryFilter, }, };
-      }
-
-      return '';
-    }
+    vm.categoryFilter = '';
 
   }
 

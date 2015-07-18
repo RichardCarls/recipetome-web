@@ -28,9 +28,13 @@ module.exports = (function() {
 
         for (var i = 0, len = files.file.length; i < len; i++) {
           var tmpPath = path.resolve(files.file[i].path);
-          var targetPath = path.resolve( // TODO: Rename file with guid
+          // TODO: Rename file with guid, prefix with user_id folder
+          var targetPath = path.resolve(
             __dirname, '../public_html/user_data/' + files.file[i].originalFilename
           );
+
+          // TODO: Define max image size
+          // TODO: Resize uploaded images, save separate thumbnail version
 
           fs.renameSync(tmpPath, targetPath, onRenameError);
 

@@ -25,6 +25,8 @@
     vm.saveRecipe = saveRecipe;
     vm.deleteRecipe = deleteRecipe;
 
+    // TODO: Save form fields in sessionStorage to persist through refresh
+
     function getThumbnail() {
       if (!vm.recipe || !vm.recipe.thumbnail) {
         return 'asset/img/recipe-image-placeholder-360x240.png';
@@ -74,21 +76,32 @@
     function saveRecipe() {
       if (vm.recipe._id) {
         // Recipe exists in the database, so do update
-        vm.recipe = RecipeService.update({ recipeId: vm.recipe._id, }, vm.recipe);
+        RecipeService
+          .update({ recipeId: vm.recipe._id, }, vm.recipe, function(recipe) {
+            vm.recipe = recipe;
+
+            // TODO: Show success/error message
+            $state.go('^.view', { recipeId: vm.recipe._id, });
+          });
       } else {
         // New recipe, do save
-        vm.recipe = RecipeService.save(vm.recipe);
-      }
+        RecipeService
+          .save(vm.recipe, function(recipe) {
+            vm.recipe = recipe;
 
-      // TODO: Show success/error message
-      $state.go('^.view', { recipeId: vm.recipe._id, });
+            // TODO: Show success/error message
+            $state.go('^.view', { recipeId: vm.recipe._id, });
+          });
+      }
     }
 
     function deleteRecipe() {
-      RecipeService.remove({ recipeId: vm.recipe._id, });
-
-      // TODO: Show success/error message, provide undo action
-      $state.go('^.list');
+      RecipeService
+        .remove({ recipeId: vm.recipe._id, })
+          .then(function() {
+            // TODO: Show success/error message, provide undo action
+            $state.go('^.list');
+          });
     }
   }
 

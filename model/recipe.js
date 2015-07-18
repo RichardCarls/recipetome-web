@@ -8,6 +8,7 @@ var RecipeIngredient = mongoose.Schema({
   measure: { type: String, trim: true, },
   name: { type: String, required: true, trim: true, },  //Required
   preparation: { type: String, trim: true, },
+  // TODO: optional: { type: Boolean, default: false, },
 });
 var RecipeStep = mongoose.Schema({
   order: { type: Number, required: true, min: 1, },  //Required
@@ -33,6 +34,7 @@ var schema = mongoose.Schema({
   },
   ingredients: [RecipeIngredient],
   steps: [RecipeStep],
+  // TODO: notes: { type: String, },
 });
 
 schema.pre('save', function(next) {
