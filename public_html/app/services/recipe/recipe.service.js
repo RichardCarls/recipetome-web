@@ -16,7 +16,7 @@
     };
 
     var service = $resource(
-      'http://localhost:3000/api/user/recipes/:recipeId',
+      '/api/user/recipes/:recipeId',
       { recipeId: '@recipeId', },
       {
         get: { method: 'GET', headers: _headers, },

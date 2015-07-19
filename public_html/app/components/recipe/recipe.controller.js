@@ -54,6 +54,8 @@
     }
 
     function removeIngredient(ingredient) {
+      // FIXME: Form showing incorrect order
+
       var index = vm.recipe.ingredients.indexOf(ingredient);
       if (index !== -1) {
         vm.recipe.ingredients.splice(index, 1);
@@ -67,6 +69,8 @@
     }
 
     function removeStep(step) {
+      // FIXME: Not removing
+
       var index = vm.recipe.steps.indexOf(step);
       if (index !== -1) {
         vm.recipe.steps.splice(index, 1);
