@@ -36,7 +36,17 @@ module.exports = (function() {
           // TODO: Define max image size
           // TODO: Resize uploaded images, save separate thumbnail version
 
-          fs.renameSync(tmpPath, targetPath, onRenameError);
+          fs.rename(tmpPath, targetPath, onMoveUpload);
+        }
+
+        function onMoveUpload(error) {
+          if (error) {
+            return response
+              .status(500)
+              .send({
+                error: error,
+              });
+          }
 
           responseData.files.push({
             fileName: files.file[i].originalFilename,
@@ -48,15 +58,7 @@ module.exports = (function() {
       });
     }
 
-    function onRenameError(error) {
-      if (error) {
-        return response
-          .status(500)
-          .send({
-            error: error,
-          });
-      }
-    }
+
 
     return router;
 })();
