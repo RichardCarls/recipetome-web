@@ -14,9 +14,7 @@
     $stateProvider
       .state('recipes', {
         abstract: true,
-        templateUrl: 'app/recipes/recipes.view.html',
-        controller: 'RecipesController',
-        controllerAs: 'vm',
+        template: '<div class="container">\n\t<main ui-view>\n\t</main>\n</div>',
       })
       .state('recipes.list', {
         url: '/recipes',

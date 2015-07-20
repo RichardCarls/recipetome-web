@@ -1,7 +1,6 @@
 var morgan = require('morgan'),
     express = require('express'),
     mongoose = require('mongoose'),
-    passport = require('passport'),
 
     bodyParser = require('body-parser'),
 
@@ -25,21 +24,15 @@ db.on('error', function(error) {
   process.exit(-1);
 });
 
-// Passport config
-//
-
 // Express config
 var app = express();
 app
   .use(morgan('dev'))
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
-  .use(passport.initialize())
-  .use(passport.session())
   .use(express.static(__dirname + '/public_html'))
   .use('/auth/local', require('./route/auth.local.js'))
   .use('/api', require('./route/api.js'))
-  .use('/userdata', require('./route/userdata.js'))
   .use('/', require('./route/default.js'));
 
 app.listen(appConfig.port);

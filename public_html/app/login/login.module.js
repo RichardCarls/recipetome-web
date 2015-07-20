@@ -12,6 +12,7 @@
     .module('recipetome.login', [
       'ui.router',
       'ui.bootstrap',
+      'services.auth',
     ]);
 
 })(angular);

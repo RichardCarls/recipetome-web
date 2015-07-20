@@ -22,7 +22,7 @@
     .module('components.recipe')
       .directive('rtRecipe', RTRecipe);
 
-  function RTRecipe($interpolate) {
+  function RTRecipe() {
     var FORMAT_CARD = 'card',
         FORMAT_FULL = 'full',
         FORMAT_FORM = "form";

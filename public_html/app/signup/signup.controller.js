@@ -9,7 +9,7 @@
     .module('recipetome.signup')
       .controller('SignUpController', SignUpController);
 
-  function SignUpController($scope, $location, AuthService) {
+  function SignUpController($scope, $state, AuthService) {
     $scope.signup = {
       user: {
         email: '',
@@ -23,12 +23,12 @@
       AuthService
         .doLocalRegistration(user)
         .then(function() {
-          $location.path('/');
+          $state.go('welcome');
         });
     }
 
     function doProviderAuthentication(provider) {
-      // TODO: Do user authentication and register local user and redirect to profile
+      // TODO: Implement for 0.2.0
     }
 
   }

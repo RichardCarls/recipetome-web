@@ -146,6 +146,9 @@ module.exports = (function() {
                 error: error,
               });
           }
+
+          // FIXME: Never returns response
+          return response.status(200);
         });
     }
 

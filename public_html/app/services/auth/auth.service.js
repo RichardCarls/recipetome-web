@@ -10,7 +10,7 @@
     .module('services.auth')
       .factory('AuthService', AuthService);
 
-  function AuthService($http, $window, $q, jwtHelper) {
+  function AuthService($http, $window, jwtHelper) {
 
     // TODO: Add verify function
 

@@ -10,7 +10,7 @@
     .module('services.recipe')
       .factory('RecipeService', RecipeService);
 
-  function RecipeService($resource, $window, UserService) {
+  function RecipeService($resource, $window) {
     var _headers = {
       'x-access-token': $window.sessionStorage.id_token,
     };

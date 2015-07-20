@@ -9,7 +9,6 @@
   angular
     .module('services.recipe', [
       'ngResource',
-      'services.user',
     ]);
 
 })(angular);

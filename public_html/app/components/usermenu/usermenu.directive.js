@@ -10,7 +10,7 @@
     .module('components.usermenu')
       .directive('userMenu', UserMenu);
 
-  function UserMenu(UserService) {
+  function UserMenu() {
     var directive = {
       restrict: 'AE',
       controller: 'UserMenuController',

@@ -9,16 +9,16 @@
     .module('recipetome')
       .controller('RecipeTomeController', RecipeTomeController);
 
-  function RecipeTomeController($scope) {
-    $scope.app = {
-      techList: [
-        { link: 'https://nodejs.org/', name: 'Node.js' },
-        { link: 'http://expressjs.com/', name: 'Express.js' },
-        { link: 'http://passportjs.org/', name: 'Passport.js' },
-        { link: 'https://angularjs.org/', name: 'Angular.js' },
-        { link: 'https://www.mongodb.org/', name: 'MongoDB' },
-      ],
-    };
+  function RecipeTomeController() {
+    var vm = this;
+
+    vm.techList = [
+      { link: 'https://nodejs.org/', name: 'Node.js' },
+      { link: 'http://expressjs.com/', name: 'Express.js' },
+      { link: 'http://passportjs.org/', name: 'Passport.js' },
+      { link: 'https://angularjs.org/', name: 'Angular.js' },
+      { link: 'https://www.mongodb.org/', name: 'MongoDB' },
+    ];
   }
 
 })(angular);

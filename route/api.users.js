@@ -76,6 +76,7 @@ module.exports = (function() {
     }
 
     // Recipe resource
+    router.use('/upload', require('./api.upload.js'));
     router.use('/categories', require('./api.categories.js'));
     router.use('/recipes', require('./api.recipes.js'));
 

@@ -16,6 +16,7 @@
     vm.rating = { max: 5, };
 
     vm.getThumbnail = getThumbnail;
+    vm.idToken = $window.sessionStorage.id_token;
     vm.onPictureUpload = onPictureUpload;
     vm.generateCategorySlug = generateCategorySlug;
     vm.addIngredient = addIngredient;
@@ -36,7 +37,7 @@
     }
 
     function onPictureUpload(file, message, flow) {
-      vm.recipe.thumbnail = JSON.parse(message).files[0].url;
+      vm.recipe.thumbnail = JSON.parse(message).photo.url;
     }
 
     function generateCategorySlug() {

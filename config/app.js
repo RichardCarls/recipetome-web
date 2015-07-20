@@ -1,7 +1,6 @@
 module.exports = {
 
-  host: 'http://localhost',   // TODO: set host dynamically with process.env?
+  host: (process.env.NODE_ENV === 'development' ? 'localhost' : 'recipeto.me' ),
   port: process.env.PORT || 3000,
   secret: 'ilikenode',        // TODO: Use better secret and hide from public!
-
 };

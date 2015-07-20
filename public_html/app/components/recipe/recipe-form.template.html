@@ -7,7 +7,12 @@
 
       <div class="form-group">
         <fieldset flow-init="{
-                    target: '/userdata/upload',
+                    target: '/api/user/upload',
+                    headers: {
+                      'x-access-token': vm.idToken,
+                    },
+                    singleFile: true,
+                    fileParameterName: 'photo',
                     uploadMethod: 'POST',
                     testChunks: false,
                   }"
