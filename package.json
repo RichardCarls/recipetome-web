@@ -33,13 +33,18 @@
     "passport-facebook": "^2.0.0",
     "passport-google-oauth": "^0.2.0",
     "passport-jwt": "^1.1.0",
-    "passport-twitter": "^1.0.3"
+    "passport-twitter": "^1.0.3",
+    "rimraf": "^2.4.2"
   },
   "devDependencies": {
+    "grunt": "^0.4.5",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-less": "^3.0.3",
+    "gulp-ng-annotate": "^1.0.0",
     "gulp-nodemon": "^2.0.3",
-    "gulp-sourcemaps": "^1.5.2"
+    "gulp-notify": "^2.2.0",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0"
   }
 }

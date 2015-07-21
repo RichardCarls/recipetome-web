@@ -10,25 +10,22 @@
       .controller('LoginController', LoginController);
 
   function LoginController($scope, $state, AuthService) {
-    $scope.login = {
-      user: {
-        email: '',
-        password: '',
-      },
-      loginLocal: doLocalLogin,
-      authenticate: doProviderAuthentication,
+    var vm = this;
+
+    vm.user = {
+      email: '',
+      password: '',
     };
 
-    function doLocalLogin(user) {
+    vm.loginLocal = doLocalLogin;
+
+    function doLocalLogin() {
       AuthService
-        .doLocalLogin(user)
+        .doLocalLogin(vm.user)
         .then(function() {
+          // TODO: Show success/error message
           $state.go('profile');
         });
-    }
-
-    function doProviderAuthentication(provider) {
-      // TODO: Do user authentication and register local user and redirect to profile
     }
 
   }

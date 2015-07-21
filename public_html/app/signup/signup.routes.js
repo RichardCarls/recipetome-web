@@ -16,6 +16,7 @@
         url: '/signup',
         templateUrl: 'app/signup/signup.view.html',
         controller: 'SignUpController',
+        controllerAs: 'vm',
       });
   }
 

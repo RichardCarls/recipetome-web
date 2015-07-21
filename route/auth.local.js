@@ -14,9 +14,7 @@ module.exports = (function() {
 
     function doLocalRegistration(request, response) {
       User
-        .findOne({
-          email: request.body.email,
-        }, function(error, user) {
+        .findOne({ email: request.body.email, }, function (error, existingUser) {
           if (error) {
             return response
               .status(500)
@@ -25,7 +23,7 @@ module.exports = (function() {
               });
           }
 
-          if (user) {
+          if (existingUser) {
             return response
               .status(409)
               .send({
@@ -38,7 +36,7 @@ module.exports = (function() {
             newUser.email = request.body.email;
             newUser.password = newUser.generateHash(request.body.password);
 
-            newUser.save(function(error) {
+            return newUser.save(function(error) {
               if (error) {
                 return response
                   .status(500)
@@ -47,20 +45,9 @@ module.exports = (function() {
                   });
               }
 
-              // Return an ID token
-              var idPayload = {
-                email: newUser.email,
-                email_verified: newUser.email_verified,
-              };
-              var options = {
-                algorithm: 'RS256',
-                expiresInMinutes: 1440,   // 24 hour expiration
-                audience: appConfig.host + ":" + appConfig.port,
-                subject: newUser.id,
-                issuer: appConfig.host + ":" + appConfig.port + '/',
-              };
-              var idToken = jwt.sign(idPayload, appConfig.secret, options);
-              response.json({
+              var idToken = createIdToken(newUser);
+
+              return response.json({
                 message: 'Registration successfull.',
                 id_token: idToken,
               });
@@ -118,9 +105,20 @@ module.exports = (function() {
         });
     }
 
-    function doLocalUnregister(request, response) {
-      // TODO: Implement for 0.1.0
-      // TODO: Delete user upload folder
+    function createIdToken(user) {
+      var idPayload = {
+        email: user.email,
+        email_verified: user.email_verified,
+      };
+      var options = {
+        expiresInMinutes: 1440,   // 24 hour expiration
+        audience: appConfig.host + ":" + appConfig.port,
+        subject: user.id,
+        issuer: appConfig.host + ":" + appConfig.port + '/',
+      };
+
+      // Return an ID token
+      return jwt.sign(idPayload, appConfig.secret, options);
     }
 
     return router;

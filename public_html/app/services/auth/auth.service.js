@@ -25,8 +25,8 @@
     function doLocalRegistration(user) {
       return $http
         .post('/auth/local/register', user)
-        .success(onAuthSuccess)
-        .error(onRegistrationError);
+        .then(onAuthSuccess)
+        .catch(onRegistrationError);
     }
 
     function doLocalLogin(user) {
@@ -40,13 +40,13 @@
       $window.sessionStorage.removeItem('id_token');
     }
 
-    function onAuthSuccess(data) {
-      if (data.id_token) {
-        $window.sessionStorage.id_token = data.id_token;
+    function onAuthSuccess(response) {
+      if (response.id_token) {
+        $window.sessionStorage.id_token = response.id_token;
       }
     }
 
-    function onRegistrationError(data) {
+    function onRegistrationError(response) {
       revoke();
 
       // TODO: Provide error feedback

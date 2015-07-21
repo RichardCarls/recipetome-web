@@ -20,6 +20,7 @@
       getCurrentUser: getCurrentUser,
       getGravatarAvatarUrl: getGravatarAvatarUrl,
       updateCredentials: updateCredentials,
+      unregister: unregister,
       logout: logout,
     };
 
@@ -97,6 +98,17 @@
       function onUpdateCredentialsError(response) {
         // TODO: Display error to user
       }
+    }
+
+    function unregister() {
+      return $http
+        .delete('/api/user/', {
+          headers: {
+            'x-access-token': $window.sessionStorage.id_token,
+          },
+        }).then(function(response) {
+          AuthService.revoke();
+        });
     }
 
     function logout() {

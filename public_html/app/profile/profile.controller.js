@@ -9,7 +9,7 @@
     .module('recipetome.profile')
       .controller('ProfileController', ProfileController);
 
-  function ProfileController(UserService, $state, user) {
+  function ProfileController($state, user, UserService) {
     var vm = this;
 
     vm.user = user;
@@ -21,6 +21,7 @@
     };
 
     vm.updateCredentials = UserService.updateCredentials;
+    vm.doUnregister = doUnregister;
 
     function updateCredentials(credentials) {
       UserService
@@ -29,6 +30,15 @@
             // TODO: Reload profile after submit?
             $state.go('profile');
           });
+    }
+
+    function doUnregister() {
+      UserService
+        .unregister()
+        .then(function() {
+          // TODO: Show success/error message
+          $state.go('welcome');
+        });
     }
   }
 

@@ -12,6 +12,7 @@
     .module('recipetome.profile', [
       'ui.router',
       'ui.bootstrap',
+      'services.auth',
       'services.user',
       'components.inputMatch',
     ]);

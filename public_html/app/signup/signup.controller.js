@@ -9,26 +9,23 @@
     .module('recipetome.signup')
       .controller('SignUpController', SignUpController);
 
-  function SignUpController($scope, $state, AuthService) {
-    $scope.signup = {
-      user: {
-        email: '',
-        password: '',
-      },
-      registerLocal: doLocalRegistration,
-      authenticate: doProviderAuthentication,
+  function SignUpController($state, AuthService) {
+    var vm = this;
+
+    vm.user = {
+      email: '',
+      password: '',
     };
 
-    function doLocalRegistration(user) {
-      AuthService
-        .doLocalRegistration(user)
-        .then(function() {
-          $state.go('welcome');
-        });
-    }
+    vm.registerLocal = doLocalRegistration;
 
-    function doProviderAuthentication(provider) {
-      // TODO: Implement for 0.2.0
+    function doLocalRegistration() {
+      AuthService
+        .doLocalRegistration(vm.user)
+        .then(function() {
+          // TODO: Show success/error message
+          $state.go('profile');
+        });
     }
 
   }

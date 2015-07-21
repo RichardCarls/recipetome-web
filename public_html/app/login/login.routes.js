@@ -16,6 +16,7 @@
         url: '/login',
         templateUrl: 'app/login/login.view.html',
         controller: 'LoginController',
+        controllerAs: 'vm',
       });
   }
 

@@ -1,8 +1,10 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
     less = require('gulp-less'),
+    uglify = require('gulp-uglify'),
     sourcemaps = require('gulp-sourcemaps'),
-    nodemon = require('gulp-nodemon');
+    ngAnnotate = require('gulp-ng-annotate'),
+    notify = require('gulp-notify');
 
 /**
  * Paths
@@ -54,14 +56,41 @@ gulp.task('vendorCopy', function() {
     .pipe(gulp.dest(config.vendorDir + '/angular-sortable-view'));
 });
 
-gulp.task('appConcat', function() {
-  gulp.src([
-    config.appDir + '/**/*.module.js',
-    config.appDir + '/**/*.js',
-  ]).pipe(sourcemaps.init())
-    .pipe(concat('recipetome.js'))
+var vendorFiles = [
+  config.bowerDir + '/cryptojslib/rollups/md5.js',
+  config.bowerDir + '/masonry/dist/masonry.pkgd.js',
+
+  config.bowerDir + '/angular/angular.js',
+  config.bowerDir + '/angular-bootstrap/ui-bootstrap-tpls.js',
+  config.bowerDir + '/angular-ui-router/release/angular-ui-router.js',
+  config.bowerDir + '/angular-resource/angular-resource.js',
+  config.bowerDir + '/angular-jwt/dist/angular-jwt.js',
+  config.bowerDir + '/angular-slugify/angular-slugify.js',
+  config.bowerDir + '/ng-flow/dist/ng-flow-standalone.js',
+  config.bowerDir + '/angular-sortable-view/src/angular-sortable-view.js',
+];
+
+gulp.task('vendorConcat', function() {
+  gulp
+    .src(vendorFiles)
+    .pipe(sourcemaps.init())
+    .pipe(ngAnnotate())
+    .pipe(concat('vendors.min.js'))
+    .pipe(uglify({ mangle: false, }))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(config.webRoot));
+    .pipe(gulp.dest(config.vendorDir));
+});
+
+gulp.task('appConcat', function() {
+  gulp
+    .src([
+      config.appDir + '/**/*.module.js',
+      config.appDir + '/**/*.js',
+    ]).pipe(ngAnnotate())
+      .pipe(sourcemaps.init())
+      .pipe(concat('recipetome.js'))
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest(config.webRoot));
 });
 
 gulp.task('styleConcat', function() {
@@ -71,27 +100,10 @@ gulp.task('styleConcat', function() {
     })).pipe(gulp.dest(config.assetDir + '/style'));
 });
 
-/**
- * Start Node server in dev mode with nodemon
- */
-gulp.task('serve:dev', ['env:dev',], function() {
-  nodemon({
-    script: './server.js',
-    watch: [
-      './server.js',
-      './route',
-      './model',
-      './config',
-    ],
-    ext: 'js, html',
-  }).on('start', ['watch',])    // Run watch on start
-    .on('change', ['watch',]);  // Run watch on change
-});
-
 gulp.task('watch', function() {
   gulp.watch(config.assetDir + '/style/**/*.less', ['styleConcat',]);
   gulp.watch(config.appDir + '/**/*.js', ['appConcat',]);
 });
 
-gulp.task('build', ['vendorCopy', 'appConcat', 'styleConcat',]);
+gulp.task('build', ['vendorCopy', 'vendorConcat', 'appConcat', 'styleConcat',]);
 gulp.task('default', ['build', 'env:dev',]);

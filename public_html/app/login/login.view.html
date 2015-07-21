@@ -4,41 +4,36 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <h1 class="text-center">Log In</h1>
-          <form name="loginForm" method="post" ng-submit="login.loginLocal(login.user)">
+          <form name="form" ng-submit="vm.loginLocal()">
             <div class="form-group has-feedback"
                  ng-class="{
-                   'has-warning': loginForm.email.$dirty,
-                   'has-success': loginForm.email.$valid && loginForm.email.$dirty,
-                   'has-error': loginForm.email.$invalid && loginForm.email.$dirty
+                   'has-warning': form.email.$dirty,
+                   'has-success': form.email.$valid && form.email.$dirty,
+                   'has-error': form.email.$invalid && form.email.$dirty
                  }">
               <input class="form-control input-lg"
                      type="email"
                      name="email"
-                     ng-model="login.user.email"
+                     ng-model="vm.user.email"
                      placeholder="Email"
                      required />
               <span class="form-control-feedback"></span>
               <p class="help-block"
-                 ng-show="loginForm.email.$error.email && !loginForm.email.$focused">Not a valid email.</p>
+                 ng-show="form.email.$error.email && !form.email.$focused">Not a valid email.</p>
             </div>
             <div class="form-group has-feedback">
               <input class="form-control input-lg"
                      type="password"
                      name="password"
-                     ng-model="login.user.password"
+                     ng-model="vm.user.password"
                      placeholder="Password"
                      required />
               <span class="form-control-feedback"></span>
             </div>
             <button class="btn btn-lg btn-block btn-primary"
                     type="submit"
-                    ng-disabled="loginForm.$invalid">Log In</button>
+                    ng-disabled="form.$invalid">Log In</button>
           </form>
-
-          <hr />
-          <h4 class="text-center">... or log in using one of these providers</h4>
-          <button class="btn btn-block btn-default"
-                  ng-click="login.authenticate('google')">Log in with Google</button>
         </div>
       </div>
     </div>

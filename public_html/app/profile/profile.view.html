@@ -136,6 +136,17 @@
                     ng-disabled="form.$invalid">Apply Changes</button>
           </div>
         </form>
+
+        <hr />
+
+        <div class="pull-right">
+          <button class="btn btn-danger"
+                  type="button"
+                  ng-click="vm.doUnregister()">
+            <i class="glyphicon glyphicon-log-out"></i>
+            <span> Delete Account</span>
+          </button>
+        </div>
       </div>
     </div>
   </main>

@@ -2,7 +2,10 @@ module.exports = (function() {
     'use strict';
     var router = require('express').Router(),
         jwt = require('jsonwebtoken'),
-        User = require('../model/user.js');
+        User = require('../model/user.js'),
+        Recipe = require('../model/recipe.js'),
+        rmdir = require('rimraf'),
+        path = require('path');
 
     router.use('/', getUserId);
 
@@ -70,6 +73,61 @@ module.exports = (function() {
 
               return response.json(user);
 
+            });
+          }
+        });
+    }
+
+    // Get user
+    router.delete('/', deleteUser);
+
+    function deleteUser(request, response) {
+      User
+        .findByIdAndRemove(request.user_id, function(error, user) {
+          if (error) {
+            return response
+              .status(500)
+              .send({
+                error: error,
+              });
+          }
+
+          if (!user) {
+            return response
+              .status(404)
+              .send({
+                message: 'User not found.',
+              });
+          } else {
+            // Delete user upload folder
+            var photoPath = path.resolve(
+              __dirname, '../public_html/user_data' + '/' + request.user_id
+            );
+            rmdir(photoPath, function(error) {
+              if (error) {
+                return response
+                  .status(500)
+                  .send({
+                    error: error,
+                  });
+              }
+
+              Recipe
+                .remove({ user_id: request.user_id, }, function(error, recipes) {
+                  if (error) {
+                    return response
+                      .status(500)
+                      .send({
+                        error: error,
+                      });
+                  }
+
+                  return response
+                    .status(200)
+                    .send({
+                      message: 'User, uploads, and Recipes deleted successfully',
+                    });
+                });
             });
           }
         });
