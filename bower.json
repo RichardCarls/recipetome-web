@@ -28,6 +28,7 @@
     "angular-slugify": "~1.0.0",
     "ng-flow": "~2.6.1",
     "cryptojslib": "~3.1.2",
-    "masonry": "~3.3.1"
+    "masonry": "~3.3.1",
+    "angular-sortable-view": "~0.0.13"
   }
 }

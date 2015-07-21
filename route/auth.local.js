@@ -118,5 +118,10 @@ module.exports = (function() {
         });
     }
 
+    function doLocalUnregister(request, response) {
+      // TODO: Implement for 0.1.0
+      // TODO: Delete user upload folder
+    }
+
     return router;
 })();

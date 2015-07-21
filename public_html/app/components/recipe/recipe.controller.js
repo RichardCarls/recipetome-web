@@ -20,9 +20,11 @@
     vm.onPictureUpload = onPictureUpload;
     vm.generateCategorySlug = generateCategorySlug;
     vm.addIngredient = addIngredient;
+    vm.onIngredientReorder = onIngredientReorder;
     vm.removeIngredient = removeIngredient;
     vm.addStep = addStep;
-    vm.removestep = removeStep;
+    vm.onStepReorder = onStepReorder;
+    vm.removeStep = removeStep;
     vm.saveRecipe = saveRecipe;
     vm.deleteRecipe = deleteRecipe;
 
@@ -44,19 +46,19 @@
       vm.recipe.category.slug = Slug.slugify(vm.recipe.category.label);
     }
 
-    function moveIngredient(direction) {
-      // TODO: Implement for 0.1.0
-    }
-
     function addIngredient() {
       vm.recipe.ingredients.push({
         order: vm.recipe.ingredients.length + 1,
       });
     }
 
-    function removeIngredient(ingredient) {
-      // FIXME: Form showing incorrect order
+    function onIngredientReorder() {
+      for (var i = 0, len = vm.recipe.ingredients.length; i < len; i++) {
+        vm.recipe.ingredients[i].order = i + 1;
+      }
+    }
 
+    function removeIngredient(ingredient) {
       var index = vm.recipe.ingredients.indexOf(ingredient);
       if (index !== -1) {
         vm.recipe.ingredients.splice(index, 1);
@@ -69,9 +71,13 @@
       });
     }
 
-    function removeStep(step) {
-      // FIXME: Not removing
+    function onStepReorder() {
+      for (var i = 0, len = vm.recipe.steps.length; i < len; i++) {
+        vm.recipe.steps[i].order = i + 1;
+      }
+    }
 
+    function removeStep(step) {
       var index = vm.recipe.steps.indexOf(step);
       if (index !== -1) {
         vm.recipe.steps.splice(index, 1);
@@ -102,11 +108,10 @@
 
     function deleteRecipe() {
       RecipeService
-        .remove({ recipeId: vm.recipe._id, })
-          .then(function() {
-            // TODO: Show success/error message, provide undo action
-            $state.go('^.list');
-          });
+        .remove({ recipeId: vm.recipe._id, }, function(response) {
+          // TODO: Show success/error message, provide undo action
+          $state.go('^.list');
+        });
     }
   }
 

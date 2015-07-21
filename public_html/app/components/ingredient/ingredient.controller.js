@@ -12,6 +12,14 @@
 
   function RTIngredientController() {
     var vm = this;
+
+    vm.moveUp = function() {
+      vm.ingredient.order -= 1;
+    };
+
+    vm.moveDown = function() {
+      vm.ingredient.order += 1;
+    };
   }
 
 })(angular);

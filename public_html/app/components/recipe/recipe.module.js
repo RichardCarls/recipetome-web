@@ -12,6 +12,7 @@
       'ui.router',
       'slugifier',
       'flow',
+      'angular-sortable-view',
       'services.recipe',
     ]);
 

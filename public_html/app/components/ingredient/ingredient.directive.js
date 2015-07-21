@@ -35,7 +35,6 @@
       scope: {
         ingredient: '=',
         format: '@',
-        order: '=',
         onRemove: '&',
       },
       template: '<div ng-include="vm.getTemplateUrl()"></div>',
@@ -50,10 +49,6 @@
       vm.format = scope.format;
       vm.ingredient = scope.ingredient;
       vm.onRemove = scope.onRemove;
-
-      if (scope.order) {
-        vm.ingredient.order = scope.order;
-      }
 
       vm.getTemplateUrl = function() {
         switch(vm.format) {

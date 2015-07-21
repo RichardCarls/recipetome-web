@@ -39,8 +39,12 @@ module.exports = (function() {
       newRecipe.user_id = request.user_id;
       newRecipe.title = request.body.title;
       newRecipe.description = request.body.description;
-      newRecipe.thumbnail = request.body.thumbnail;
-      newRecipe.category = request.body.category;
+      if (request.body.thumbnail) {
+        newRecipe.thumbnail = request.body.thumbnail;
+      }
+      if (request.body.category) {
+        newRecipe.category = request.body.category;
+      }
       newRecipe.rating = request.body.rating;
 
       if (request.body.cook_time) {
@@ -138,7 +142,7 @@ module.exports = (function() {
 
     function deleteRecipe(request, response) {
       Recipe
-        .remove({ _id: request.params.recipeId }, function(error) {
+        .findByIdAndRemove(request.params.recipeId, function(error, recipe) {
           if (error) {
             return response
               .status(500)
@@ -147,8 +151,24 @@ module.exports = (function() {
               });
           }
 
-          // FIXME: Never returns response
-          return response.status(200);
+          if (!recipe) {
+            return response
+              .status(404)
+              .send({
+                message: 'Recipe with id ' + request.params.recipeId + ' not found.',
+              });
+          } else {
+            var photoPath = path.resolve(__dirname, '../public_html/' + recipe.thumbnail);
+
+            // Remove recipe photo
+            fs.unlink(photoPath, function(error) {
+              return response
+                .status(200)
+                .send({
+                  message: 'Recipe deleted successfully',
+                });
+            });
+          }
         });
     }
 

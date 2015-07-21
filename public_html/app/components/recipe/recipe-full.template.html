@@ -67,7 +67,13 @@
   <hr />
 
   <footer class="pull-right">
-    <a class="btn btn-warning" ui-sref="^.edit({ recipeId: recipe._id })">Edit</a>
-    <button class="btn btn-danger" ng-click="vm.deleteRecipe()">Delete</a>
+    <a class="btn btn-warning" ui-sref="^.edit({ recipeId: vm.recipe._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+      <span>Edit</span>
+    </a>
+    <button class="btn btn-danger" ng-click="vm.deleteRecipe()">
+      <i class="glyphicon glyphicon-remove"></i>
+      <span>Delete</span>
+    </button>
   </footer>
 </article>

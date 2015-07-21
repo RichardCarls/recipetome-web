@@ -50,6 +50,8 @@ gulp.task('vendorCopy', function() {
     .pipe(gulp.dest(config.vendorDir + '/angular-slugify'));
   gulp.src(config.bowerDir + '/ng-flow/dist/ng-flow-standalone.min.js')
     .pipe(gulp.dest(config.vendorDir + '/ng-flow'));
+  gulp.src(config.bowerDir + '/angular-sortable-view/src/angular-sortable-view.min.js')
+    .pipe(gulp.dest(config.vendorDir + '/angular-sortable-view'));
 });
 
 gulp.task('appConcat', function() {
