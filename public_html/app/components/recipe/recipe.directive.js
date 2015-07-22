@@ -27,9 +27,6 @@
         FORMAT_FULL = 'full',
         FORMAT_FORM = "form";
 
-    var FORM_METHOD_POST = "post",
-        FORM_METHOD_PUT = "put";
-
     var directive = {
       restrict: 'AE',
       controller: 'RTRecipeController',
@@ -59,10 +56,8 @@
 
     function link(scope, element, attrs, vm) {
       if (attrs.format === FORMAT_FORM && !scope.recipe._id) {
-        vm.saveMethod = FORM_METHOD_POST;
         vm.title = 'New Recipe';
       } else {
-        vm.saveMethod = FORM_METHOD_PUT;
         vm.title = 'Edit Recipe';
       }
 

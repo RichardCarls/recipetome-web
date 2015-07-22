@@ -1,25 +1,27 @@
 /**
- * Recipe Tome recipe ingredient component controller
+ * @name RTIngredient:controller
+ * @description Controller for the {@linkcode RTIngredient} directive.
+ * @see RTIngredient
+ * @since 0.1.0
  *
- * @namespace RecipeTome/Components/Ingredient/Controller
- * @memberof RecipeTome/Components/Ingredient
+ * @memberof RecipeTome/Components/RTIngredient
+ *
+ * @author Richard Carls [richard.j.carls@gmail.com]
+ * @copyright 2015 Richard Carls
+ * @license MIT
  */
 ;(function(angular) {
+  'use strict';
 
   angular
     .module('components.ingredient')
       .controller('RTIngredientController', RTIngredientController);
 
+  /**
+   * @class
+   */
   function RTIngredientController() {
     var vm = this;
-
-    vm.moveUp = function() {
-      vm.ingredient.order -= 1;
-    };
-
-    vm.moveDown = function() {
-      vm.ingredient.order += 1;
-    };
   }
 
 })(angular);

@@ -16,6 +16,7 @@
         url: '/',
         templateUrl: 'app/welcome/welcome.view.html',
         controller: 'WelcomeController',
+        controllerAs: 'vm',
       });
   }
 
