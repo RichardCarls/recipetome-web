@@ -25,8 +25,8 @@
     function doLocalRegistration(user) {
       return $http
         .post('/auth/local/register', user)
-        .then(onAuthSuccess)
-        .catch(onRegistrationError);
+        .success(onAuthSuccess)
+        .error(onRegistrationError);
     }
 
     function doLocalLogin(user) {

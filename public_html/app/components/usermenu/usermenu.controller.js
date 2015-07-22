@@ -10,20 +10,18 @@
     .module('components.usermenu')
       .controller('UserMenuController', UserMenuController);
 
-  function UserMenuController($scope, $state, UserService) {
-    UserService
-      .getCurrentUser()
-      .then(function(user) {
-        $scope.user = user;
-      });
+  function UserMenuController($state, UserService) {
+    var vm = this;
 
-    $scope.isLoggedIn = function() {
-      return UserService.isLoggedIn();
-    };
-    $scope.logout = function() {
+    vm.isLoggedIn = UserService.isLoggedIn;
+    vm.logout = logout;
+
+    function logout() {
       UserService.logout();
+
+      // TODO: Show success/error message
       $state.go('welcome');
-    };
+    }
   }
 
 })(angular);

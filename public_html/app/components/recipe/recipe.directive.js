@@ -58,11 +58,14 @@
     }
 
     function link(scope, element, attrs, vm) {
-      if (attrs.format === FORMAT_FORM && !attrs.recipe) {
+      if (attrs.format === FORMAT_FORM && !scope.recipe._id) {
         vm.saveMethod = FORM_METHOD_POST;
+        vm.title = 'New Recipe';
+      } else {
+        vm.saveMethod = FORM_METHOD_PUT;
+        vm.title = 'Edit Recipe';
       }
 
-      vm.saveMethod = FORM_METHOD_PUT;
       vm.recipe = scope.recipe;
       vm.format = scope.format;
 

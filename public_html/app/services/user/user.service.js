@@ -106,9 +106,7 @@
           headers: {
             'x-access-token': $window.sessionStorage.id_token,
           },
-        }).then(function(response) {
-          AuthService.revoke();
-        });
+        }).then(logout);
     }
 
     function logout() {

@@ -14,7 +14,7 @@
     var directive = {
       restrict: 'AE',
       controller: 'UserMenuController',
-      scope: {},
+      controllerAs: 'vm',
       templateUrl: 'app/components/usermenu/usermenu.template.html',
     };
 
