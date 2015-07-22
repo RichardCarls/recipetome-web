@@ -1,16 +1,24 @@
 /**
- * Recipe Tome user menu component directive
+ * @name UserMenu:directive
+ * @description Directive for UserMenu component.
+ * @see RecipeTome/Components/UserMenu
+ * @since 0.1.0
  *
- * @namespace RecipeTome/Components/UserMenu/Directive
  * @memberof RecipeTome/Components/UserMenu
  */
 ;(function(angular) {
+  'use strict';
 
   angular
     .module('components.usermenu')
       .directive('userMenu', UserMenu);
 
+  /**
+   * @class
+   */
   function UserMenu() {
+
+    // ---
     var directive = {
       restrict: 'AE',
       controller: 'UserMenuController',
@@ -19,6 +27,7 @@
     };
 
     return directive;
+    // ---
   }
 
 })(angular);

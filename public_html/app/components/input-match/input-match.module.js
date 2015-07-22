@@ -6,8 +6,8 @@
  * @example
  * <input type="text" name="input1" />
  *
- * // Value must match `input1` to be valid
- * <input type="text" name="input2" input-match="input1" />
+ * // Value must match `input1` to be valid, pass the angular form model
+ * <input type="text" name="input2" input-match="form.input1" />
  * @since 0.1.0
  *
  * @namespace RecipeTome/Components/InputMatch
