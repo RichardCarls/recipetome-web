@@ -1,7 +1,7 @@
 /**
  * @name RTIngredient:controller
  * @description Controller for the {@linkcode RTIngredient} directive.
- * @see RTIngredient
+ * @see RecipeTome/Components/RTIngredient
  * @since 0.1.0
  *
  * @memberof RecipeTome/Components/RTIngredient

@@ -1,7 +1,7 @@
 /**
  * @name Recipes:Single:controller
  * @description Controller for the {@linkcode Recipes:Single} view.
- * @see Recipes
+ * @see RecipeTome/Recipes
  * @since 0.1.0
  *
  * @memberof RecipeTome/Recipes
@@ -35,7 +35,7 @@
     /**
      * Format to show the recipe.
      *
-     * @see {@linkcode RecipeTome/Component/RTRecipe} for possible formats.
+     * @see {@linkcode RecipeTome/Components/RTRecipe} for possible formats.
      * @type {String}
      */
     vm.format = format;

@@ -1,7 +1,7 @@
 /**
  * @name RTRecipe:controller
  * @description Controller for the {@linkcode RTRecipe} directive.
- * @see RTRecipe
+ * @see RecipeTome/Components/RTRecipe
  * @since 0.1.0
  *
  * @memberof RecipeTome/Components/RTRecipe
@@ -21,7 +21,7 @@
    * @class
    *
    * @param {ui.router.state.$state} $state
-   * @param {RecipeTome/Service/RecipeService} RecipeService
+   * @param {RecipeTome/Services/RecipeService} RecipeService
    * @param {slugifier} Slug
    */
   function RTRecipeController($state, RecipeService, Slug) {

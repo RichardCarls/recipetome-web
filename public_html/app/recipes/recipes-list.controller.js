@@ -1,7 +1,7 @@
 /**
  * @name Recipes:List:controller
  * @description Controller for the {@linkcode Recipes:List} view.
- * @see Recipes
+ * @see RecipeTome/Recipes
  * @since 0.1.0
  *
  * @memberof RecipeTome/Recipes

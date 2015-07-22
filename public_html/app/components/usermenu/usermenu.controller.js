@@ -1,7 +1,7 @@
 /**
  * @name UserMenu:controller
  * @description Controller for the {@linkcode UserMenu} directive.
- * @see UserMenu
+ * @see RecipeTome/Components/UserMenu
  * @since 0.1.0
  *
  * @memberof RecipeTome/Components/UserMenu
@@ -20,7 +20,7 @@
   /**
    * @class
    * @param {ui.router.state.$state} $state
-   * @param {RecipeTome/Service/UserService} UserService
+   * @param {RecipeTome/Services/UserService} UserService
    */
   function UserMenuController($state, UserService) {
     var vm = this;

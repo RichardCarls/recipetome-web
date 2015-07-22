@@ -20,7 +20,7 @@
   /**
    * @class
    * @param {ui.router.state.$state} $state
-   * @param {RecipeTome/Service/AuthService} AuthService
+   * @param {RecipeTome/Services/AuthService} AuthService
    */
   function LoginController($state, AuthService) {
     var vm = this;

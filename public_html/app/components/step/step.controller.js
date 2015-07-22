@@ -1,7 +1,7 @@
 /**
  * @name RTStep:controller
  * @description Controller for the {@linkcode RTStep} directive.
- * @see RTStep
+ * @see RecipeTome/Components/RTStep
  * @since 0.1.0
  *
  * @memberof RecipeTome/Components/RTStep

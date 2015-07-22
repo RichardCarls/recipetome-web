@@ -20,7 +20,7 @@
   /**
    * @class
    * @param {ui.router.state.$state} $state
-   * @param {Recipetome/Service/UserService} UserService
+   * @param {Recipetome/Services/UserService} UserService
    * @param {Object} user
    */
   function ProfileController($state, UserService, user) {
