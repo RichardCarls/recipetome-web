@@ -8,7 +8,13 @@
     <title>Recipe Tome</title>
 
     <link rel="stylesheet" type="text/css" href="asset/style/recipetome.css" />
-
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <script type="text/javascript">
+      // Fallback
+      (window.angular || document.write('<script type="text/javascript" src="vendor\/angular\/angular.min.js"><\/script>'));
+    </script>
+    
     <!-- HTML5 Shim -->
     <!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -44,6 +50,9 @@
         </p>
       </div>
     </footer>
+    
+    <script type="text/javascript" async="true" src="vendor/cryptojslib/rollups/md5.js"></script>
+    <script type="text/javascript" async="true"  src="vendor/masonry/masonry.pkgd.min.js"></script>
     
     <script type="text/javascript" src="vendor/vendors.min.js"></script>
     <script type="text/javascript" src="recipetome.js"></script>

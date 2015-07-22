@@ -33,7 +33,7 @@ gulp.task('vendorCopy', function() {
   gulp.src(config.bowerDir + '/cryptojslib/rollups/md5.js')
     .pipe(gulp.dest(config.vendorDir + '/cryptojslib/rollups'));
 
-  // jQuery
+  // Masonry
   gulp.src(config.bowerDir + '/masonry/dist/masonry.pkgd.min.js')
     .pipe(gulp.dest(config.vendorDir + '/masonry'));
 
@@ -56,11 +56,7 @@ gulp.task('vendorCopy', function() {
     .pipe(gulp.dest(config.vendorDir + '/angular-sortable-view'));
 });
 
-var vendorFiles = [
-  config.bowerDir + '/cryptojslib/rollups/md5.js',
-  config.bowerDir + '/masonry/dist/masonry.pkgd.js',
-
-  config.bowerDir + '/angular/angular.js',
+var vendorModules = [
   config.bowerDir + '/angular-bootstrap/ui-bootstrap-tpls.js',
   config.bowerDir + '/angular-ui-router/release/angular-ui-router.js',
   config.bowerDir + '/angular-resource/angular-resource.js',
@@ -72,12 +68,12 @@ var vendorFiles = [
 
 gulp.task('vendorConcat', function() {
   gulp
-    .src(vendorFiles)
+    .src(vendorModules)
     .pipe(sourcemaps.init())
     .pipe(ngAnnotate())
     .pipe(concat('vendors.min.js'))
     .pipe(uglify({ mangle: false, }))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.vendorDir));
 });
 
