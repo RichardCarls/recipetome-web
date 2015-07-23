@@ -6764,9 +6764,39 @@ button.close {
     display: none !important;
   }
 }
+html,
+body {
+  height: 100%;
+}
 .nav,
 .pagination,
 .carousel,
 .panel-title a {
   cursor: pointer;
+}
+.page-wrap {
+  min-height: 100%;
+  margin-bottom: -90px;
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+  height: 90px;
+}
+.site-footer {
+  height: 90px;
+}
+.recipe__thumbnail-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.recipe__thumbnail-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  -ms-interpolation-mode: bicubic;
+}
+.masonry {
+  margin: 10px 0 25px 0;
 }

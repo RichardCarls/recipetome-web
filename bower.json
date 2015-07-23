@@ -22,6 +22,14 @@
     "angular": "~1.4.2",
     "angular-bootstrap": "~0.13.0",
     "bootstrap": "~3.3.5",
-    "angular-ui-router": "~0.2.15"
+    "angular-jwt": "~0.0.9",
+    "angular-ui-router": "~0.2.15",
+    "angular-resource": "~1.4.2",
+    "angular-slugify": "~1.0.0",
+    "ng-flow": "~2.6.1",
+    "cryptojslib": "~3.1.2",
+    "masonry": "~3.3.1",
+    "angular-sortable-view": "~0.0.13",
+    "angular-flash-alert": "~1.1.0"
   }
 }

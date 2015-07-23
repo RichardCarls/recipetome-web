@@ -1,0 +1,79 @@
+<article class="recipe">
+  <header>
+    <h1 class="recipe__title">
+      <strong ng-bind="vm.recipe.title"></strong>
+    </h1>
+    <p class="recipe__description lead text-muted">
+      <em ng-bind="vm.recipe.description"></em>
+    </p>
+  </header>
+
+  <hr />
+
+  <div class="row">
+    <div class="col-md-5">
+      <div class="img-responsive img-thumbnail" style="margin-bottom: 25px;">
+        <figure class="recipe__thumbnail-wrap">
+          <img class="recipe__thumbnail" ng-src="{{vm.getThumbnail()}}" />
+        </figure>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">At a glance</div>
+        <div class="panel-body">
+          <dl class="dl-horizontal">
+            <dt>What you'll need:</dt>
+            <dd>
+              <ul class="list-inline">
+                <li ng-repeat="ingredient in vm.recipe.ingredients">
+                  <span>{{ingredient.name}}, </span>
+                </li>
+              </ul>
+            </dd>
+            <dt>Prep time:</dt>
+            <dd ng-bind="vm.recipe.prep_time"></dd>
+            <dt>Cook time:</dt>
+            <dd ng-bind="vm.recipe.cook_time"></dd>
+            <dt>Makes:</dt>
+            <dd ng-bind="vm.recipe.yield_qty"></dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-7">
+      <h3>Ingredients</h3>
+      <hr />
+      <ol class="list-unstyled">
+        <li rt-ingredient
+            ng-repeat="ingredient in vm.recipe.ingredients | orderBy: 'order'"
+            ingredient="ingredient"
+            format="inline">
+        </li>
+      </ol>
+
+      <h3>Directions</h3>
+      <hr />
+      <ol class="list-unstyled">
+        <li rt-step
+            ng-repeat="step in vm.recipe.steps | orderBy: 'order'"
+            step="step"
+            format="block">
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <hr />
+
+  <footer class="pull-right">
+    <a class="btn btn-warning" ui-sref="^.edit({ recipeId: vm.recipe._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+      <span>Edit</span>
+    </a>
+    <button class="btn btn-danger" ng-click="vm.deleteRecipe()">
+      <i class="glyphicon glyphicon-remove"></i>
+      <span>Delete</span>
+    </button>
+  </footer>
+</article>

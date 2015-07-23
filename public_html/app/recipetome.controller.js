@@ -1,28 +1,40 @@
 /**
- * Recipe Tome application controller
- * @namespace RecipeTome/Controller
+ * @name RecipeTome:controller
+ * @description Controller for the {@linkcode RecipeTome} application.
+ * @see RecipeTome
+ * @since 0.1.0
+ *
  * @memberof RecipeTome
+ *
+ * @author Richard Carls [richard.j.carls@gmail.com]
+ * @copyright 2015 Richard Carls
+ * @license MIT
  */
 ;(function(angular) {
+  'use strict';
 
   angular
     .module('recipetome')
       .controller('RecipeTomeController', RecipeTomeController);
 
-  function RecipeTomeController($scope, $sce) {
-    $scope.app = {
-      inlineTemplates: {
-        copyright: $sce.trustAsHtml('Recipe Tome v0.1.0 &nbsp;|&nbsp; &copy; 2015 <a href="http://www.richardcarls.com">Richard Carls</a>'),
-        license: $sce.trustAsHtml('Code licensed under <a href="https://github.com/RichardCarls/recipetome-web/blob/master/LICENSE">MIT</a> License'),
-        techList: [
-          $sce.trustAsHtml('<a href="https://nodejs.org/">Node.js</a>, '),
-          $sce.trustAsHtml('<a href="http://expressjs.com/">Express.js</a>, '),
-          $sce.trustAsHtml('<a href="http://passportjs.org/">Passport.js</a>, '),
-          $sce.trustAsHtml('<a href="https://angularjs.org/">Angular.js</a>, and '),
-          $sce.trustAsHtml('<a href="https://www.mongodb.org/">MongoDB</a>.'),
-        ],
-      },
-    };
+  /**
+   * @class
+   */
+  function RecipeTomeController() {
+    var vm = this;
+
+    /**
+     * List of libraries used in the application for display in the site footer.
+     *
+     * @type {Object[]}
+     */
+    vm.techList = [
+      { link: 'https://nodejs.org/', name: 'Node.js' },
+      { link: 'http://expressjs.com/', name: 'Express.js' },
+      { link: 'http://passportjs.org/', name: 'Passport.js' },
+      { link: 'https://angularjs.org/', name: 'Angular.js' },
+      { link: 'https://www.mongodb.org/', name: 'MongoDB' },
+    ];
   }
 
 })(angular);

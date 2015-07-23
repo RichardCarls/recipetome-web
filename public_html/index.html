@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html ng-app="recipetome">
+<html ng-app="recipetome" ng-strict-di>
   <head>
+    <base href="/" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
@@ -8,49 +9,57 @@
 
     <link rel="stylesheet" type="text/css" href="asset/style/recipetome.css" />
 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <script type="text/javascript">
+      // Fallback
+      (window.angular || document.write('<script type="text/javascript" src="vendor\/angular\/angular.min.js"><\/script>'));
+    </script>
+
     <!-- HTML5 Shim -->
     <!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
 
-  <body ng-controller="RecipeTomeController">
-    <header class="navbar navbar-default navbar-static-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" ui-sref="welcome">Recipe Tome</a>
+  <body ng-controller="RecipeTomeController as vm" flow-prevent-drop>
+    <div class="page-wrap">
+      <header class="navbar navbar-default navbar-static-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <div class="navbar-header">
+              <a class="navbar-brand" ui-sref="welcome">Recipe Tome</a>
+            </div>
+            <nav user-menu>
+            </nav>
           </div>
-          <nav class="navbar-right">
-            <ul class="nav navbar-nav">
-              <li><a ui-sref="welcome">Home</a></li>
-            </ul>
-          </nav>
         </div>
-      </div>
-    </header>
+      </header>
 
-    <div ui-view></div>
+      <!-- Flash Messages -->
+      <div flash-message="3000"></div>
 
-    <footer>
+      <div ui-view></div>
+    </div>
+
+    <footer class="site-footer">
       <div class="container">
         <p class="text-center">
-          <span ng-bind-html="app.inlineTemplates.copyright"></span>
+          <span>Recipe Tome v0.1.0 &nbsp;|&nbsp; &copy; 2015 <a href="http://www.richardcarls.com">Richard Carls</a></span>
         </p>
         <p class="text-center">
-          <span ng-bind-html="app.inlineTemplates.license"></span>
+          <span>Code licensed under <a href="https://github.com/RichardCarls/recipetome-web/blob/master/LICENSE">MIT</a> License</span>
         </p>
         <p class="text-center">
           <span>Powered by </span>
-          <span ng-repeat="link in app.inlineTemplates.techList" ng-bind-html="link"></span>
+          <span ng-repeat="tech in vm.techList"><a ng-href="tech.link">{{tech.name}}</a>, </span>
         </p>
       </div>
     </footer>
 
-    <script type="text/javascript" src="vendor/angular/angular.min.js"></script>
-    <script type="text/javascript" src="vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script type="text/javascript" src="vendor/angular-ui-router/angular-ui-router.min.js"></script>
+    <script type="text/javascript" async="true" src="vendor/cryptojslib/rollups/md5.js"></script>
+    <script type="text/javascript" async="true"  src="vendor/masonry/masonry.pkgd.min.js"></script>
 
+    <script type="text/javascript" src="vendor/vendors.min.js"></script>
     <script type="text/javascript" src="recipetome.js"></script>
   </body>
 </html>

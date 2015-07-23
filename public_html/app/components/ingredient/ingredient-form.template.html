@@ -1,0 +1,82 @@
+<div>
+  <div class="col-md-1">
+
+    <!-- Order Preview -->
+    <h4><strong ng-bind="vm.ingredient.order"></strong></h4>
+
+    <!-- Order (required, hidden: set with 'order' directive attribute) -->
+    <input type="hidden"
+           name="order"
+           ng-model="vm.ingredient.order"
+           required />
+  </div>
+
+  <div class="col-md-3">
+    <div class="form-group">
+
+      <!-- Qty -->
+      <input class="form-control input-sm"
+             type="number"
+             name="qty"
+             step="any"
+             min="0.1"
+             ng-model="vm.ingredient.qty" />
+
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="form-group">
+
+      <!-- Measure -->
+      <input class="form-control input-sm"
+             type="text"
+             name="measure"
+             ng-model="vm.ingredient.measure"
+             placeholder="Measure" />
+
+    </div>
+  </div>
+
+  <div class="col-md-5">
+    <div class="form-group">
+
+      <!-- Name (required) -->
+      <input class="form-control input-sm"
+             type="text"
+             name="name"
+             ng-model="vm.ingredient.name"
+             placeholder="Ingredient"
+             required />
+
+    </div>
+  </div>
+
+  <div class="col-md-7 col-md-offset-1">
+    <div class="form-group">
+
+      <!-- Preparation -->
+      <input class="form-control input-sm"
+             type="text"
+             name="preparation"
+             ng-model="vm.ingredient.preparation"
+             placeholder="Preparation" />
+
+    </div>
+  </div>
+
+  <!-- Show if `onRemove` handler is present -->
+  <div class="col-md-4" ng-show="vm.onRemove">
+    <div class="form-group">
+
+      <!-- Remove -->
+      <button class="btn btn-danger btn-sm btn-block"
+              type="button"
+              ng-click="vm.onRemove()">
+        <i class="glyphicon glyphicon-minus" aria-hidden="true"></i>
+        <span> Remove</span>
+      </button>
+
+    </div>
+  </div>
+</div>

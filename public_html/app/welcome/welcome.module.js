@@ -1,17 +1,22 @@
 /**
- * Recipe Tome welcome view module
- *
- * This view state represents an unauthenticated user on the landing page.
+ * @name Welcome
+ * @description Welcome view module for Recipe Tome.
+ * @since 0.1.0
  *
  * @namespace RecipeTome/Welcome
  * @memberof RecipeTome
+ *
+ * @author Richard Carls [richard.j.carls@gmail.com]
+ * @copyright 2015 Richard Carls
+ * @license MIT
  */
 ;(function(angular) {
+  'use strict';
 
   angular
     .module('recipetome.welcome', [
-      'ui.bootstrap',
       'ui.router',
+      'ui.bootstrap',
     ]);
 
 })(angular);

@@ -1,0 +1,41 @@
+<div class="container">
+  <main class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h1 class="text-center">Log In</h1>
+          <form name="form" ng-submit="vm.loginLocal()">
+            <div class="form-group has-feedback"
+                 ng-class="{
+                   'has-warning': form.email.$dirty,
+                   'has-success': form.email.$valid && form.email.$dirty,
+                   'has-error': form.email.$invalid && form.email.$dirty
+                 }">
+              <input class="form-control input-lg"
+                     type="email"
+                     name="email"
+                     ng-model="vm.user.email"
+                     placeholder="Email"
+                     required />
+              <span class="form-control-feedback"></span>
+              <p class="help-block"
+                 ng-show="form.email.$error.email && !form.email.$focused">Not a valid email.</p>
+            </div>
+            <div class="form-group has-feedback">
+              <input class="form-control input-lg"
+                     type="password"
+                     name="password"
+                     ng-model="vm.user.password"
+                     placeholder="Password"
+                     required />
+              <span class="form-control-feedback"></span>
+            </div>
+            <button class="btn btn-lg btn-block btn-primary"
+                    type="submit"
+                    ng-disabled="form.$invalid">Log In</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

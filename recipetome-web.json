@@ -1,0 +1,11 @@
+{
+  "apps": [{
+    "name": "recipetome-web",
+    "script": "server.js",
+    "watch": true,
+    "cwd": "/opt/recipetome",
+    "env": {
+      "NODE_ENV": 'production'
+    }
+  }]
+}
