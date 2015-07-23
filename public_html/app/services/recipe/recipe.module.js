@@ -2,6 +2,7 @@
  * @name RecipeService
  * @description An `ngResource` REST service for recipe CRUD operations.
  * @requires ngResource
+ * @see RecipeTome/Services/RecipeService:service
  * @since 0.1.0
  *
  * @namespace RecipeTome/Services/RecipeService

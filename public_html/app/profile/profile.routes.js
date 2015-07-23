@@ -1,15 +1,25 @@
 /**
- * Recipe Tome profile view routes
+ * @name Profile:routes
+ * @description Recipe Tome profile view routes.
+ * @since 0.1.0
  *
- * @namespace RecipeTome/Profile/Routes
  * @memberof RecipeTome/Profile
+ *
+ * @author Richard Carls [richard.j.carls@gmail.com]
+ * @copyright 2015 Richard Carls
+ * @license MIT
  */
 ;(function(angular) {
+  'use strict';
 
   angular
     .module('recipetome.profile')
       .config(ProfileRoutesConfig);
 
+  /**
+   * @class
+   * @param {ui.router.$stateProvider} $stateProvider
+   */
   function ProfileRoutesConfig($stateProvider) {
     $stateProvider
       .state('profile', {
