@@ -64,14 +64,12 @@
        */
       vm.getTemplateUrl = function() {
         switch(vm.format) {
-          case FORMAT_CARD:
-            return 'app/components/recipe/recipe-card.template.html';
-          case FORMAT_FULL:
-            return 'app/components/recipe/recipe-full.template.html';
+          case FORMAT_INLINE:
+            return 'app/components/ingredient/ingredient-inline.template.html';
           case FORMAT_FORM:
-            return 'app/components/recipe/recipe-form.template.html';
+            return 'app/components/ingredient/ingredient-form.template.html';
           default:
-            return 'app/components/recipe/recipe-card.template.html';
+            return 'app/components/ingredient/ingredient-inline.template.html';
         }
       };
     }

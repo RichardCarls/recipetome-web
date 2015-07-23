@@ -20,10 +20,11 @@
   /**
    * @class
    * @param {ui.router.state.$state} $state
+   * @param {flash.Flash} Flash
    * @param {Recipetome/Services/UserService} UserService
    * @param {Object} user
    */
-  function ProfileController($state, UserService, user) {
+  function ProfileController($state, Flash, UserService, user) {
     var vm = this;
 
     /**
@@ -64,10 +65,17 @@
     function updateCredentials(credentials) {
       UserService
         .updateCredentials(credentials)
-          .then(function() {
-            // TODO: Show success/error message
-            $state
-              .go('profile', {}, { refresh: true, });
+          .then(function(result) {
+            if (result.success) {
+              Flash
+                .create('success', 'Credentials updated.');
+
+              $state
+                .go('profile', {}, { refresh: true, });
+            } else {
+              Flash
+                .create('error', result.message);
+            }
           });
     }
 
@@ -79,10 +87,17 @@
     function doUnregister() {
       UserService
         .unregister()
-        .then(function() {
-          // TODO: Show success/error message
-          $state
-            .go('welcome');
+        .then(function(result) {
+          if (result.success) {
+            Flash
+              .create('success', 'Unregistration successful.');
+
+            $state
+              .go('welcome');
+          } else {
+            Flash
+              .create('error', result.message);
+          }
         });
     }
   }

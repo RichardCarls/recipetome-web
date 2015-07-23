@@ -2,8 +2,29 @@
 
 // TODO: Bootstrap property overrides.
 
+html,
+body {
+  height: 100%;
+}
+
 // Enable Bootstrap cursor styles with angular-bootstrap
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+// Needed for sticky footer
+.page-wrap {
+  min-height: 100%;
+  margin-bottom: -90px;
+
+  &:after {
+    content: "";
+    display: block;
+    height: 90px;
+  }
+}
+
+.site-footer {
+  height: 90px;
+}
 
 .recipe {
   &__thumbnail {

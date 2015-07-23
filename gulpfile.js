@@ -54,6 +54,8 @@ gulp.task('vendorCopy', function() {
     .pipe(gulp.dest(config.vendorDir + '/ng-flow'));
   gulp.src(config.bowerDir + '/angular-sortable-view/src/angular-sortable-view.min.js')
     .pipe(gulp.dest(config.vendorDir + '/angular-sortable-view'));
+  gulp.src(config.bowerDir + '/angular-flash-alert/dist/angular-flash.min.js')
+    .pipe(gulp.dest(config.vendorDir + '/angular-flash-alert'));
 });
 
 var vendorModules = [
@@ -64,6 +66,7 @@ var vendorModules = [
   config.bowerDir + '/angular-slugify/angular-slugify.js',
   config.bowerDir + '/ng-flow/dist/ng-flow-standalone.js',
   config.bowerDir + '/angular-sortable-view/src/angular-sortable-view.js',
+  config.bowerDir + '/angular-flash-alert/dist/angular-flash.js',
 ];
 
 gulp.task('vendorConcat', function() {

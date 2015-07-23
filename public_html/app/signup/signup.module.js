@@ -18,6 +18,7 @@
     .module('recipetome.signup', [
       'ui.router',
       'ui.bootstrap',
+      'flash',
       'services.auth',
     ]);
 

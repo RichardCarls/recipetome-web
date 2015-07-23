@@ -37,7 +37,6 @@
       UserService
         .logout();
 
-      // TODO: Show success/error message
       $state
         .go('welcome');
     }

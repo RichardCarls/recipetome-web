@@ -53,7 +53,7 @@
      * @return {Boolean} `true` if logged in, `false` otherwise
      */
     function isLoggedIn() {
-      return _currentUser ? true : false;
+      return $window.sessionStorage.id_token ? true : false;
     }
 
     /**
@@ -165,7 +165,7 @@
        * @param  {Object} response
        */
       function onUpdateCredentialsError(response) {
-        // TODO: Display error to user
+        return { success: false, message: response.data, };
       }
     }
 
@@ -180,7 +180,13 @@
           headers: {
             'x-access-token': $window.sessionStorage.id_token,
           },
-        }).then(logout);
+        }).then(function(response) {
+          logout();
+
+          return { success: true, };
+        }).catch(function(response) {
+          return { success: false, message: response.data, };
+        });
     }
 
     /**

@@ -25,6 +25,7 @@
     .module('recipetome', [
       'ui.router',
       'ui.bootstrap',
+      'flash',
       'recipetome.services',
       'recipetome.components',
       'recipetome.welcome',

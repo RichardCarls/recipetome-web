@@ -35,6 +35,7 @@
     .module('components.recipe', [
       'ui.bootstrap',
       'ui.router',
+      'flash',
       'slugifier',
       'flow',
       'angular-sortable-view',

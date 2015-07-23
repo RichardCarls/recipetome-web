@@ -45,8 +45,8 @@
     function doLocalRegistration(user) {
       return $http
         .post('/auth/local/register', user)
-        .success(onAuthSuccess)
-        .error(onAuthError);
+        .then(onAuthSuccess)
+        .catch(onAuthError);
     }
 
     /**
@@ -58,8 +58,8 @@
     function doLocalLogin(user) {
       return $http
         .post('/auth/local', user)
-        .success(onAuthSuccess)
-        .error(onAuthError);
+        .then(onAuthSuccess)
+        .catch(onAuthError);
     }
 
     /**
@@ -77,11 +77,15 @@
      * @callback
      * @param  {Object} responseBody Body of the response object
      */
-    function onAuthSuccess(responseBody) {
-      var id_token = responseBody.id_token;
+    function onAuthSuccess(response) {
+      var id_token = response.data.id_token;
 
       if (id_token) {
         $window.sessionStorage.id_token = id_token;
+
+        return { success: true, };
+      } else {
+          return { success: false, message: 'No id token with response.', };
       }
     }
 
@@ -90,10 +94,10 @@
      *
      * @param  {Object} responseBody Body of the response object
      */
-    function onAuthError(responseBody) {
+    function onAuthError(response) {
       revoke();
 
-      // TODO: Provide error feedback
+      return { success: false, message: response.data, };
     }
   }
 

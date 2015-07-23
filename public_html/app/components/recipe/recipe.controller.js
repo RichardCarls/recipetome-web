@@ -21,10 +21,11 @@
    * @class
    *
    * @param {ui.router.state.$state} $state
+   * @param {flash.Flash} Flash
    * @param {RecipeTome/Services/RecipeService} RecipeService
    * @param {slugifier} Slug
    */
-  function RTRecipeController($state, RecipeService, Slug) {
+  function RTRecipeController($state, Flash, RecipeService, Slug) {
     var vm = this;
 
     /**
@@ -157,23 +158,42 @@
       if (vm.recipe._id) {
         // Recipe exists in the database, so do update
         RecipeService
-          .update({ recipeId: vm.recipe._id, }, vm.recipe, function(recipe) {
-            vm.recipe = recipe;
-
-            // TODO: Show success/error message
-            $state
-              .go('^.view', { recipeId: vm.recipe._id, });
-          });
+          .update(
+            { recipeId: vm.recipe._id, },
+            vm.recipe,
+            onSaveRecipeSuccess,
+            onSaveRecipeError
+          );
       } else {
         // New recipe, do save
         RecipeService
-          .save(vm.recipe, function(recipe) {
-            vm.recipe = recipe;
+          .save(vm.recipe, onSaveRecipeSuccess, onSaveRecipeError);
+      }
 
-            // TODO: Show success/error message
-            $state
-              .go('^.view', { recipeId: vm.recipe._id, });
-          });
+      /**
+       * Handles successful recipe update or save.
+       *
+       * @callback
+       * @param  {Object} recipe
+       */
+      function onSaveRecipeSuccess(recipe) {
+        vm.recipe = recipe;
+
+        Flash
+          .create('success', 'Recipe saved.');
+        $state
+          .go('^.view', { recipeId: vm.recipe._id, });
+      }
+
+      /**
+       * Handles failed recipe update or save.
+       *
+       * @callback
+       * @param  {Object} response
+       */
+      function onSaveRecipeError(response) {
+        Flash
+          .create('error', response);
       }
     }
 
@@ -183,13 +203,38 @@
      */
     function deleteRecipe() {
       RecipeService
-        .remove({ recipeId: vm.recipe._id, }, function(response) {
+        .remove(
+          { recipeId: vm.recipe._id, },
+          onDeleteRecipeSuccess,
+          onDeleteRecipeError
+        );
 
-          // TODO: Show success/error message
-          // TODO: Save recipe to session storage, provide undo option
-          $state
-            .go('^.list');
-        });
+      /**
+       * Handles successful recipe deletion.
+       *
+       * @callback
+       * @param  {Object} response
+       */
+      function onDeleteRecipeSuccess(response) {
+        // TODO: Save recipe to session storage, provide undo option
+
+        Flash
+          .create('success', 'Recipe deleted.');
+
+        $state
+          .go('^.list');
+      }
+
+      /**
+       * Handles failed recipe deletion.
+       *
+       * @callback
+       * @param  {Object} response
+       */
+      function onDeleteRecipeError(response) {
+        Flash
+          .create('error', response);
+      }
     }
   }
 

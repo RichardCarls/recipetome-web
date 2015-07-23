@@ -20,9 +20,10 @@
   /**
    * @class
    * @param {ui.router.state.$state} $state
+   * @param {flash.Flash} Flash
    * @param {RecipeTome/Services/AuthService} AuthService
    */
-  function SignUpController($state, AuthService) {
+  function SignUpController($state, Flash, AuthService) {
     var vm = this;
 
     // TODO: Encrypt password before sending to server
@@ -48,10 +49,17 @@
     function doLocalRegistration() {
       AuthService
         .doLocalRegistration(vm.user)
-        .then(function() {
-          // TODO: Show success/error message
-          $state
-            .go('profile');
+        .then(function(result) {
+          if (result.success) {
+            Flash
+              .create('success', 'Registration successful.');
+
+            $state
+              .go('profile');
+          } else {
+            Flash
+              .create('error', result.message);
+          }
         });
     }
   }
