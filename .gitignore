@@ -1,4 +1,6 @@
 node_modules
 bower_components
-upload
+cert
 public_html/user_data
+public_html/recipetome.js
+public_html/asset/style/recipetome.css
