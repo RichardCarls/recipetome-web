@@ -1,5 +1,9 @@
 var morgan = require('morgan'),
     express = require('express'),
+    fs = require('fs'),
+    path = require('path'),
+    http = require('http'),
+    https = require('https'),
     mongoose = require('mongoose'),
 
     bodyParser = require('body-parser'),
@@ -17,17 +21,11 @@ mongoose.connect(dbConfig.url, dbConfig.options, function(error) {
   process.exit(-1);
 });
 
-var db = mongoose.connection;
-db.on('error', function(error) {
-  console.log('MongoDB connection error');
-  console.log(error);
-  process.exit(-1);
-});
-
 // Express config
 var app = express();
 app
   .use(morgan('dev'))
+  .use(httpsRedirect)
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
   .use(express.static(__dirname + '/public_html'))
@@ -35,5 +33,31 @@ app
   .use('/api', require('./route/api.js'))
   .use('/', require('./route/default.js'));
 
-app.listen(appConfig.port);
-console.log('Server listening on port ' + appConfig.port);
+var db = mongoose.connection;
+db.on('error', function(error) {
+  console.log('MongoDB connection error');
+  console.log(error);
+  process.exit(-1);
+});
+
+// HTTPS config
+var httpsOptions = {
+  key: fs.readFileSync(appConfig.credentials.key),
+  cert: fs.readFileSync(appConfig.credentials.cert),
+};
+
+function httpsRedirect(request, response, next) {
+  if (!request.secure) {
+    console.log("Insecure request, redirecting ...");
+    return response
+      .redirect('https://' + appConfig.host + ":" + appConfig.securePort + request.url);
+  }
+
+  next();
+}
+
+secureServer = https.createServer(httpsOptions, app)
+  .listen(appConfig.securePort);
+
+insecureServer = http.createServer(app)
+  .listen(appConfig.port);

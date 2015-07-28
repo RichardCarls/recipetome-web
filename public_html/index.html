@@ -21,7 +21,7 @@
     <![endif]-->
   </head>
 
-  <body ng-controller="RecipeTomeController as vm" flow-prevent-drop>
+  <body ng-controller="RecipeTomeController as appCtrl" flow-prevent-drop>
     <div class="page-wrap">
       <header class="navbar navbar-default navbar-static-top">
         <div class="navbar-inner">
@@ -51,7 +51,7 @@
         </p>
         <p class="text-center">
           <span>Powered by </span>
-          <span ng-repeat="tech in vm.techList"><a ng-href="tech.link">{{tech.name}}</a>, </span>
+          <span ng-repeat="tech in appCtrl.techList"><a ng-href="tech.link">{{::tech.name}}</a>{{$last ? '' : ', '}}</span>
         </p>
       </div>
     </footer>
