@@ -25,9 +25,7 @@
    */
   function SignUpController($state, Flash, AuthService) {
     var vm = this;
-
-    // TODO: Encrypt password before sending to server
-
+    
     /**
      * Prototype `User` object for signup form.
      *

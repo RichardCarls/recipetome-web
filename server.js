@@ -41,10 +41,8 @@ db.on('error', function(error) {
 });
 
 // HTTPS config
-var httpsOptions = {
-  key: fs.readFileSync(appConfig.credentials.key),
-  cert: fs.readFileSync(appConfig.credentials.cert),
-};
+appConfig.credentials.key = fs.readFileSync(appConfig.credentials.keyPath);
+appConfig.credentials.cert = fs.readFileSync(appConfig.credentials.certPath);
 
 function httpsRedirect(request, response, next) {
   if (!request.secure) {
@@ -56,7 +54,7 @@ function httpsRedirect(request, response, next) {
   next();
 }
 
-secureServer = https.createServer(httpsOptions, app)
+secureServer = https.createServer(appConfig.credentials, app)
   .listen(appConfig.securePort);
 
 insecureServer = http.createServer(app)

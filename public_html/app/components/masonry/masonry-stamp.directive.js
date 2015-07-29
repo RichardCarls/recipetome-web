@@ -37,7 +37,6 @@
      */
     function link(scope, element, attrs) {
       $timeout(function() {
-        // Wait for jQLite .ready() to ensure images are loaded
         element.ready(function() {
           scope
             .$emit(attrs.rtTag || 'masonry-item-added', element, true);
@@ -45,5 +44,5 @@
       });
     }
   }
-  
+
 })(angular);

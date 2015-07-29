@@ -24,7 +24,7 @@
    * @param {RecipeTome/Services/AuthService} AuthService
    */
   function UserService($http, $window, $q, AuthService) {
-    var GRAVATAR_BASEURL = 'http://www.gravatar.com/avatar/';
+    var GRAVATAR_BASEURL = 'https://secure.gravatar.com/avatar/';
 
     /**
      * Cached user object representing the current logged in user.
@@ -53,7 +53,8 @@
      * @return {Boolean} `true` if logged in, `false` otherwise
      */
     function isLoggedIn() {
-      return $window.sessionStorage.id_token ? true : false;
+      return AuthService
+        .verify();
     }
 
     /**
@@ -69,12 +70,11 @@
         deferred.resolve(_currentUser);
       }
 
-      // TODO: Verify with AuthService to remove $window dependency
-      if ($window.sessionStorage.id_token) {
+      if (AuthService.verify()) {
         $http
           .get('/api/user/', {
             headers: {
-              'x-access-token': $window.sessionStorage.id_token,
+              'x-access-token': AuthService.getIdToken(),
             }
           }).then(onGetCurrentUserSuccess)
             .catch(onGetCurrentUserError);
@@ -130,12 +130,11 @@
      * @return {Promise} angular.$http promise
      */
     function updateCredentials(credentials) {
-      // TODO: Verify with AuthService to remove $window dependency
-      if ($window.sessionStorage.id_token) {
+      if (AuthService.verify()) {
         return $http
           .put('/api/user/', credentials, {
             headers: {
-              'x-access-token': $window.sessionStorage.id_token,
+              'x-access-token': AuthService.getIdToken(),
             }
           }).then(onUpdateCredentialsSuccess)
             .catch(onUpdateCredentialsError);
@@ -178,7 +177,7 @@
       return $http
         .delete('/api/user/', {
           headers: {
-            'x-access-token': $window.sessionStorage.id_token,
+            'x-access-token': AuthService.getIdToken(),
           },
         }).then(function(response) {
           logout();

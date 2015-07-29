@@ -30,6 +30,8 @@
     var service = {
       doLocalRegistration: doLocalRegistration,
       doLocalLogin: doLocalLogin,
+      getIdToken: getIdToken,
+      verify: verify,
       revoke: revoke,
     };
 
@@ -60,6 +62,23 @@
         .post('/auth/local', user)
         .then(onAuthSuccess)
         .catch(onAuthError);
+    }
+
+    /**
+     * Returns the current user's id token.
+     * @return {String} The id token
+     */
+    function getIdToken() {
+      return $window.sessionStorage.id_token;
+    }
+
+    /**
+     * Checks the current user's authentication status.
+     * @return {Boolean} `true` if user has valid id token, `false` otherwise
+     */
+    function verify() {
+      // TODO: Check token exp
+      return $window.sessionStorage.id_token ? true : false;
     }
 
     /**

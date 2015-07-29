@@ -25,9 +25,7 @@
    */
   function LoginController($state, Flash, AuthService) {
     var vm = this;
-
-    // TODO: Encrypt user password before sending to server
-
+    
     /**
      * Prototype `User` object.
      *

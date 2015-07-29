@@ -39,8 +39,6 @@
      */
     vm.gravatarImage = UserService.getGravatarAvatarUrl();
 
-    // TODO: Encrypt user password(s) before sending to server
-
     /**
      * Prototype credentials object for profile edit form.
      *
@@ -53,7 +51,7 @@
     };
 
     // ---
-    vm.updateCredentials = UserService.updateCredentials;
+    vm.updateCredentials = updateCredentials;
     vm.doUnregister = doUnregister;
     // ---
 
@@ -71,7 +69,7 @@
                 .create('success', 'Credentials updated.');
 
               $state
-                .go('profile', {}, { refresh: true, });
+                .go('profile', {}, { reload: true, });
             } else {
               Flash
                 .create('error', result.message);

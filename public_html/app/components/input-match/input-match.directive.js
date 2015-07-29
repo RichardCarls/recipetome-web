@@ -50,6 +50,8 @@
        * @return {*} The passed in value (no formatting performed)
        */
       function validateInput(value) {
+        // FIXME: Doesn't validate unless control is refocused
+
         if (ngModel.$untouched || ngModel.$pristine) { return; }
 
         var targetValue = scope.inputMatch.$viewValue;
