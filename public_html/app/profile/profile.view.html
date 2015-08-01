@@ -86,8 +86,8 @@
             <!-- Password Confirm -->
             <div class="form-group"
                  ng-class="{
-                   'has-error' : form.password_confirm.$invalid
-                   && !form.password_confirm.$pristine
+                   'has-error' : form.password_confirm.$invalid &&
+                   !form.password.$pristine
                  }"
                  ng-show="form.editPassword">
               <label for="password_confirm">Confirm Password</label>
@@ -98,9 +98,10 @@
                      ng-model-options="{ allowInvalid: !form.editPassword }"
                      placeholder="Confirm New Password"
                      input-match="form.password"
-                     ng-required="form.editPassword" />
-              <p ng-show="form.password_confirm.$invalid
-                          && !form.password_confirm.$pristine"
+                     ng-required="form.editPassword"
+                     ng-disabled="form.password.$pristine" />
+              <p ng-show="form.password_confirm.$invalid &&
+                          !form.password.$pristine"
                  class="help-block">Password values must match.</p>
 
                  <!-- Cancel Password Change -->

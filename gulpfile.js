@@ -29,6 +29,10 @@ gulp.task('vendorCopy', function() {
   gulp.src(config.bowerDir + '/bootstrap/fonts/*')
     .pipe(gulp.dest(config.assetDir + '/fonts'));
 
+  // jQuery (for testing)
+  gulp.src(config.bowerDir + '/jquery/dist/jquery.min.js')
+    .pipe(gulp.dest(config.vendorDir + '/jquery'));
+
   // Crypto.js
   gulp.src(config.bowerDir + '/cryptojslib/rollups/md5.js')
     .pipe(gulp.dest(config.vendorDir + '/cryptojslib/rollups'));
@@ -40,6 +44,8 @@ gulp.task('vendorCopy', function() {
   // Angular and 3rd party module dependencies
   gulp.src(config.bowerDir + '/angular/angular.min.{js,js.map}')
     .pipe(gulp.dest(config.vendorDir + '/angular'));
+  gulp.src(config.bowerDir + '/angular-mocks/angular-mocks.js')
+    .pipe(gulp.dest(config.vendorDir + '/angular-mocks'));
   gulp.src(config.bowerDir + '/angular-bootstrap/ui-bootstrap-tpls.min.js')
     .pipe(gulp.dest(config.vendorDir + '/angular-bootstrap'));
   gulp.src(config.bowerDir + '/angular-ui-router/release/angular-ui-router.min.js')
@@ -85,6 +91,7 @@ gulp.task('appConcat', function() {
     .src([
       config.appDir + '/**/*.module.js',
       config.appDir + '/**/*.js',
+      '!' + config.appDir + '/**/*.spec.js',
     ]).pipe(ngAnnotate())
       .pipe(sourcemaps.init())
       .pipe(concat('recipetome.js'))

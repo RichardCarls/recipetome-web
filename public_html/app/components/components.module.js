@@ -27,6 +27,7 @@
       'components.step',
       'components.inputMatch',
       'components.masonry',
+      'components.appendFilter',
     ]);
 
 })(angular);

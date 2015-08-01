@@ -21,21 +21,19 @@
   /**
    * @class
    */
-  function RTIngredient() {
+  function RTIngredient($parse) {
     var FORMAT_INLINE = 'inline',
         FORMAT_FORM = "form";
 
     // ---
     var directive = {
       restrict: 'AE',
-      controller: 'RTIngredientController',
-      controllerAs: 'vm',
       scope: {
         ingredient: '=',
         format: '@',
         onRemove: '&',
       },
-      template: '<div ng-include="vm.getTemplateUrl()"></div>',
+      template: '<div ng-include="getTemplateUrl()"></div>',
       link: link,
     };
 
@@ -49,21 +47,14 @@
      * @param  {Object} attrs
      * @param  {RecipeTome/Components/RTIngredient:controller} vm
      */
-    function link(scope, element, attrs, vm) {
-
-      // ---
-      vm.format = scope.format;
-      vm.ingredient = scope.ingredient;
-      vm.onRemove = scope.onRemove;
-      // ---
-
+    function link(scope, element, attrs) {
       /**
        * Returns the HTML template associated with the specified 'format'.
        *
        * @return {String} The template file URL
        */
-      vm.getTemplateUrl = function() {
-        switch(vm.format) {
+      scope.getTemplateUrl = function() {
+        switch(scope.format) {
           case FORMAT_INLINE:
             return 'app/components/ingredient/ingredient-inline.template.html';
           case FORMAT_FORM:
