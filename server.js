@@ -48,7 +48,7 @@ function httpsRedirect(request, response, next) {
   if (!request.secure) {
     console.log("Insecure request, redirecting ...");
     return response
-      .redirect('https://' + appConfig.host + ":" + appConfig.securePort + request.url);
+      .redirect('https://' + request.hostname + ":" + appConfig.securePort + request.url);
   }
 
   next();

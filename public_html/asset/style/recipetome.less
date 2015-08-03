@@ -1,6 +1,5 @@
 @import 'bootstrap.less';
-
-// TODO: Bootstrap property overrides.
+@import 'theme/base.theme.less';
 
 html,
 body {
@@ -50,4 +49,44 @@ body {
 
 .masonry {
   margin: 10px 0 25px 0;
+}
+
+.drag-handle {
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+
+  &:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+  }
+}
+
+.list-group-item-custom {
+  //padding: 10px 0;
+}
+
+.list-group-text {
+  padding: 10px 15px;
+}
+
+.list-group-addon {
+  display: inline-block;
+  margin-bottom: -1px;
+  padding: 10px 15px;
+  min-height: 50px;
+  font-size: 15px;
+  font-weight: normal;
+
+
+  &--left {
+    margin-right: 15px;
+    text-align: left;
+  }
+
+  &--right {
+    margin-left: 15px;
+    text-align: right;
+  }
 }

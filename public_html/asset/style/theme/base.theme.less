@@ -1,0 +1,82 @@
+/* BASE COLORS */
+
+@gray-base:              #000;
+@gray-darker:            #3E3F3A;
+@gray-dark:              #8E8C84;
+@gray:                   #98978B;
+@gray-light:             #DFD7CA;
+@gray-lighter:           #F8F5F0;
+
+@brand-primary:         #325D88;
+@brand-success:         #93C54B;
+@brand-info:            #29ABE0;
+@brand-warning:         #F47C3C;
+@brand-danger:          #d9534f;
+
+@body-bg:               #fff;
+@text-color:            #3E3F3A;
+
+@link-color:            @brand-success;
+@link-hover-color:      darken(@link-color, 10%);
+@link-hover-decoration: underline;
+
+
+@import 'buttons.theme.less';
+@import 'components.theme.less';
+@import 'forms.theme.less';
+@import 'navbar.theme.less';
+@import 'state.theme.less';
+@import 'table.theme.less';
+@import 'typography.theme.less';
+
+
+/* Z-INDEX */
+
+@zindex-navbar:            1000;
+@zindex-dropdown:          1000;
+@zindex-popover:           1060;
+@zindex-tooltip:           1070;
+@zindex-navbar-fixed:      1030;
+@zindex-modal-background:  1040;
+@zindex-modal:             1050;
+
+
+/* MEDIA QUERIES */
+
+@screen-xs:                  480px;
+@screen-xs-min:              @screen-xs;
+@screen-phone:               @screen-xs-min;
+
+@screen-sm:                  768px;
+@screen-sm-min:              @screen-sm;
+@screen-tablet:              @screen-sm-min;
+
+@screen-md:                  992px;
+@screen-md-min:              @screen-md;
+@screen-desktop:             @screen-md-min;
+
+@screen-lg:                  1200px;
+@screen-lg-min:              @screen-lg;
+@screen-lg-desktop:          @screen-lg-min;
+
+// Prevent overlap
+@screen-xs-max:              (@screen-sm-min - 1);
+@screen-sm-max:              (@screen-md-min - 1);
+@screen-md-max:              (@screen-lg-min - 1);
+
+
+/* GRID */
+@grid-columns:              12;
+@grid-gutter-width:         30px;
+
+@grid-float-breakpoint:     @screen-sm-min;
+@grid-float-breakpoint-max: (@grid-float-breakpoint - 1);
+
+
+/* CONTAINERS */
+@container-tablet:             (720px + @grid-gutter-width);
+@container-sm:                 @container-tablet;
+@container-desktop:            (940px + @grid-gutter-width);
+@container-md:                 @container-desktop;
+@container-large-desktop:      (1140px + @grid-gutter-width);
+@container-lg:                 @container-large-desktop;

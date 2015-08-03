@@ -102,7 +102,10 @@ gulp.task('appConcat', function() {
 gulp.task('styleConcat', function() {
   return gulp.src(config.assetDir + '/style/recipetome.less')
     .pipe(less({
-      paths: [config.bowerDir + '/bootstrap/less',],
+      paths: [
+        config.bowerDir + '/bootstrap/less',
+        config.assetDir + '/style/**/*.less',
+      ],
     })).pipe(gulp.dest(config.assetDir + '/style'));
 });
 

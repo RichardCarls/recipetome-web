@@ -33,7 +33,7 @@
         format: '@',
         onRemove: '&',
       },
-      template: '<div ng-include="getTemplateUrl()"></div>',
+      template: '<span ng-include="getTemplateUrl()"></span>',
       link: link,
     };
 
