@@ -16,7 +16,6 @@
   angular
     .module('recipetome.welcome', [
       'ui.router',
-      'ui.bootstrap',
     ]);
 
 })(angular);

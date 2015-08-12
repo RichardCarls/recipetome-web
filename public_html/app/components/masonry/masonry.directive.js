@@ -39,8 +39,6 @@
      */
     function link(scope, element, attrs) {
 
-      // FIXME: Items overlap on initial loading
-
       /**
        * Masonry options
        * @type {Object}

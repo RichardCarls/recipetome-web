@@ -23,6 +23,8 @@
   function RecipeTomeController() {
     var vm = this;
 
+    vm.version = 'v0.1.2';
+
     /**
      * List of libraries used in the application for display in the site footer.
      *

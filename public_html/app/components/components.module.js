@@ -22,12 +22,10 @@
   angular
     .module('recipetome.components', [
       'components.usermenu',
-      'components.recipe',
-      'components.ingredient',
-      'components.step',
       'components.inputMatch',
       'components.masonry',
       'components.appendFilter',
+      'components.uploadField',
     ]);
 
 })(angular);

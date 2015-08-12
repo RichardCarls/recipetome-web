@@ -1,43 +1,40 @@
-<div class="container">
-  <main class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <h1 class="text-center">Sign Up</h1>
-          <form name="form" ng-submit="vm.registerLocal()">
-            <div class="form-group has-feedback"
-                 ng-class="{
-                   'has-warning': form.email.$dirty,
-                   'has-success': form.email.$valid && form.email.$dirty,
-                   'has-error': form.email.$invalid && form.email.$dirty
-                 }">
-              <input class="form-control input-lg"
-                     type="email"
+<div class="ui view container">
+  <div class="ui middle aligned center aligned grid">
+    <main class="column">
+      <h1 class="ui header">Sign Up</h1>
+      <form class="ui large form" name="form" ng-submit="vm.registerLocal()">
+
+        <fieldset class="ui segment">
+          <div class="field">
+            <div class="ui left icon input">
+              <input type="email"
                      name="email"
                      ng-model="vm.user.email"
                      placeholder="Email"
                      required />
-              <span class="form-control-feedback"></span>
-              <p class="help-block"
-                 ng-show="form.email.$error.email && !form.email.$focused">Not a valid email.</p>
+              <i class="user icon"></i>
             </div>
-            <div class="form-group has-feedback">
-              <input class="form-control input-lg"
-                     type="password"
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <input type="password"
                      name="password"
                      ng-model="vm.user.password"
                      placeholder="Password"
                      required />
-              <span class="form-control-feedback"></span>
+              <i class="lock icon"></i>
             </div>
-            <button class="btn btn-lg btn-block btn-primary"
-                    type="submit"
-                    ng-disabled="form.$invalid">Sign Up</button>
-            <br />
-            <p class="text-center text-muted">Already have an account? <a ui-sref="login">Log in</a>.</p>
-          </form>
-        </div>
+          </div>
+        </fieldset>
+
+        <button class="ui primary fluid large submit button"
+                type="submit"
+                ng-disabled="form.$invalid">Sign Up</button>
+      </form>
+
+      <div class="ui message">
+        <p>Already have an account? <a ui-sref="login">Log in</a></p>
       </div>
-    </div>
-  </main>
+    </main>
+  </div>
 </div>

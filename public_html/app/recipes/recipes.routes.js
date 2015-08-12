@@ -23,17 +23,19 @@
    */
   function RecipesRoutesConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
-      // Abstract parent state
-      .state('recipes', {
-        abstract: true,
-        template: '<div class="container">\n\t<main ui-view>\n\t</main>\n</div>',
-      })
       // Recipes list
-      .state('recipes.list', {
-        url: '/recipes',
-        templateUrl: 'app/recipes/recipes-list.view.html',
+      .state('recipes', {
+        url: '/recipes?category',
+        templateUrl: 'app/recipes/list/recipes-list.view.html',
         controller: 'RecipesListController',
         controllerAs: 'vm',
+        reloadOnSearch: false,
+        params: {
+          category: {
+            value: '',
+            squash: true,
+          },
+        },
         resolve: {
           recipes: function(RecipeService) {
             return RecipeService.query().$promise;
@@ -51,48 +53,37 @@
           },
         },
       })
+      // Recipes create view
+      .state('recipes.edit', {
+        url: '/edit/:recipeId?step',
+        templateUrl: 'app/recipes/edit/recipes-edit.view.html',
+        controller: 'RecipesEditController',
+        controllerAs: 'vm',
+        params: {
+          step: {
+            value: '1',
+            squash: true,
+          },
+        },
+        resolve: {
+          recipe: function($stateParams, RecipeService) {
+            if ($stateParams.recipeId) {
+              return RecipeService.get({ recipeId: $stateParams.recipeId, }).$promise;
+            } else {
+              return null;
+            }
+          },
+        },
+      })
       // Recipes single view
       .state('recipes.view', {
-        url: '/recipes/view/:recipeId',
-        templateUrl: 'app/recipes/recipes-single.view.html',
-        controller: 'RecipesViewController',
+        url: '/:recipeId',
+        templateUrl: 'app/recipes/single/recipes-single.view.html',
+        controller: 'RecipesSingleController',
         controllerAs: 'vm',
         resolve: {
           recipe: function($stateParams, RecipeService) {
             return RecipeService.get({ recipeId: $stateParams.recipeId, }).$promise;
-          },
-          format: function() {
-            return 'full';
-          },
-        },
-      })
-      // Recipes edit view
-      .state('recipes.edit', {
-        url: '/recipes/view/:recipeId/edit',
-        templateUrl: 'app/recipes/recipes-single.view.html',
-        controller: 'RecipesViewController',
-        controllerAs: 'vm',
-        resolve: {
-          recipe: function($stateParams, RecipeService) {
-            return RecipeService.get({ recipeId: $stateParams.recipeId, }).$promise;
-          },
-          format: function() {
-            return 'form';
-          },
-        },
-      })
-      // Recipes create view
-      .state('recipes.create', {
-        url: '/recipes/create',
-        templateUrl: 'app/recipes/recipes-single.view.html',
-        controller: 'RecipesViewController',
-        controllerAs: 'vm',
-        resolve: {
-          recipe: function() {
-            return { ingredients: [], steps: [], };
-          },
-          format: function() {
-            return 'form';
           },
         },
       });

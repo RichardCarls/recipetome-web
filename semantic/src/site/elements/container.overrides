@@ -1,0 +1,7 @@
+/*******************************
+         Site Overrides
+*******************************/
+.ui.container.view {
+  padding-top: 2em;
+  padding-bottom: 2em;
+}

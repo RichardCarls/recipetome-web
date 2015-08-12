@@ -24,8 +24,8 @@
   angular
     .module('recipetome', [
       'ui.router',
-      'ui.bootstrap',
-      'flash',
+      'ngAnimate',
+      'toaster',
       'recipetome.services',
       'recipetome.components',
       'recipetome.welcome',

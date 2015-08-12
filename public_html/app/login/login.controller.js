@@ -23,9 +23,9 @@
    * @param {flash.Flash} Flash
    * @param {RecipeTome/Services/AuthService} AuthService
    */
-  function LoginController($state, Flash, AuthService) {
+  function LoginController($state, toaster, AuthService) {
     var vm = this;
-    
+
     /**
      * Prototype `User` object.
      *
@@ -49,16 +49,13 @@
         .doLocalLogin(vm.user)
         .then(function(result) {
           if (result.success) {
-            console.log('SUCCESS');
-            Flash
-              .create('success', 'Login successful.');
-
             $state
               .go('profile');
           } else {
-            console.log('ERROR: ' + result.message);
-            Flash
-              .create('error', result.message);
+            toaster.pop(
+              'error', 'Problem logging in',
+              result.message
+            );
           }
         });
     }

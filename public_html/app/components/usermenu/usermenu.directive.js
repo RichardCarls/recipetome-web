@@ -21,6 +21,7 @@
     // ---
     var directive = {
       restrict: 'AE',
+      replace: true,
       controller: 'UserMenuController',
       controllerAs: 'vm',
       templateUrl: 'app/components/usermenu/usermenu.template.html',

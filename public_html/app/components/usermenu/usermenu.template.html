@@ -1,11 +1,20 @@
-<nav class="navbar-right">
-  <ul ng-hide="vm.isLoggedIn()" class="nav navbar-nav">
-    <li><a ui-sref="signup">Sign up</a></li>
-    <li><a ui-sref="login">Log in</a></li>
-  </ul>
-  <ul ng-show="vm.isLoggedIn()" class="nav navbar-nav">
-    <li><a ui-sref="profile">Profile</a></li>
-    <li><a ui-sref="recipes.list">Recipes</a></li>
-    <li ng-click="vm.logout()"><a>Log Out</a></li>
-  </ul>
+<nav class="ui large green inverted menu">
+  <a class="item"
+     ui-sref="welcome"
+     ui-sref-active="active">Home</a>
+  <a class="item"
+     ui-sref="profile"
+     ui-sref-active="active"
+     ng-show="vm.isLoggedIn()">Profile</a>
+  <a class="item"
+     ui-sref="recipes"
+     ui-sref-active="active"
+     ng-show="vm.isLoggedIn()">Recipes</a>
+
+  <div class="right menu">
+    <a class="ui item button" ui-sref="signup" ng-hide="vm.isLoggedIn()">Sign up</a>
+    <a class="ui item button" ui-sref="login" ng-hide="vm.isLoggedIn()">Log in</a>
+
+    <a class="ui item button" ng-click="vm.logout()" ng-show="vm.isLoggedIn()">Log Out</a>
+  </div>
 </nav>
