@@ -43,18 +43,13 @@
        * Masonry options
        * @type {Object}
        */
+      //var options = {};
       var options = { itemSelector: '[rt-masonry-item]', };
 
       /**
        * Masonry instance
        */
       var masonry;
-
-      /**
-       * Keeps track of masonry item dirty state.
-       * @type {Boolean}
-       */
-      var dirty = true;
 
       // On next digest cycle, create Masonry instance
       $timeout(onContainerReady);
@@ -71,7 +66,7 @@
 
         // Watch the items collection
         if (attrs.rtWatch) {
-          scope.$watch(attrs.rtWatch + '', onItemsChanged);
+          scope.$watch(attrs.rtWatch + '', reloadItems);
         }
       }
 
@@ -88,18 +83,6 @@
           masonry.stamp(item);
         }
 
-        dirty = true;
-        reloadItems();
-      }
-
-      /**
-       * Handles changes in the items collection.
-       *
-       * @callback
-       * @param  {Object|Object[]} items
-       */
-      function onItemsChanged(items) {
-        dirty = true;
         reloadItems();
       }
 
@@ -108,15 +91,11 @@
        */
       function reloadItems() {
         $timeout(function() {
-          if (dirty) {
             masonry.reloadItems();
             masonry.layout();
-
-            dirty = false;
-          }
         });
       }
     }
   }
-  
+
 })(angular);

@@ -84,17 +84,7 @@ module.exports = (function() {
                 });
             } else {
               // Return an ID token
-              var idPayload = {
-                email: user.email,
-                email_verified: user.email_verified,
-              };
-              var options = {
-                expiresInMinutes: 1440,   // 24 hour expiration
-                audience: appConfig.host + ":" + appConfig.port,
-                subject: user.id,
-                issuer: appConfig.host + ":" + appConfig.port + '/',
-              };
-              var idToken = jwt.sign(idPayload, appConfig.secret, options);
+              var idToken = createIdToken(user);
               response.json({
                 user: user.id,
                 message: 'Authentication successfull.',
@@ -118,7 +108,7 @@ module.exports = (function() {
       };
 
       // Return an ID token
-      return jwt.sign(idPayload, appConfig.secret, options);
+      return jwt.sign(idPayload, appConfig.credentials.key, options);
     }
 
     return router;

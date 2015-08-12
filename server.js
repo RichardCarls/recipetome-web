@@ -41,22 +41,20 @@ db.on('error', function(error) {
 });
 
 // HTTPS config
-var httpsOptions = {
-  key: fs.readFileSync(appConfig.credentials.key),
-  cert: fs.readFileSync(appConfig.credentials.cert),
-};
+appConfig.credentials.key = fs.readFileSync(appConfig.credentials.keyPath);
+appConfig.credentials.cert = fs.readFileSync(appConfig.credentials.certPath);
 
 function httpsRedirect(request, response, next) {
   if (!request.secure) {
     console.log("Insecure request, redirecting ...");
     return response
-      .redirect('https://' + appConfig.host + ":" + appConfig.securePort + request.url);
+      .redirect('https://' + request.hostname + ":" + appConfig.securePort + request.url);
   }
 
   next();
 }
 
-secureServer = https.createServer(httpsOptions, app)
+secureServer = https.createServer(appConfig.credentials, app)
   .listen(appConfig.securePort);
 
 insecureServer = http.createServer(app)

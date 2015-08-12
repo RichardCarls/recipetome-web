@@ -19,8 +19,6 @@
   angular
     .module('recipetome.profile', [
       'ui.router',
-      'ui.bootstrap',
-      'flash',
       'services.auth',
       'services.user',
       'components.inputMatch',

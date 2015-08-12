@@ -18,9 +18,9 @@
 
   angular
     .module('recipetome.recipes', [
-      'ui.router',
-      'ui.bootstrap',
-      'services.recipe',
+      'recipes.list',
+      'recipes.single',
+      'recipes.edit',
     ]);
 
 })(angular);

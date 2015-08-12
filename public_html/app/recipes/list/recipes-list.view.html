@@ -1,0 +1,76 @@
+<main class="ui view container" ui-view>
+  <nav class="ui stackable borderless menu">
+
+    <h1 class="header item">My Recipes</h1>
+
+    <a class="item" ui-sref=".edit">
+      <i class="plus icon"></i>
+      <span>Create</span>
+    </a>
+
+    <div class="right item">
+      <form class="ui form" name="filterForm">
+        <div class="inline field">
+          <label for="category">Filter by Category </label>
+          <select class="form-control"
+                  type="select"
+                  name="category"
+                  ng-model="vm.categoryFilter"
+                  ng-change="vm.updateQueryString()"
+                  ng-options="category.slug as category.label for category in vm.categories">
+            <option value="">(All)</option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </nav>
+
+  <section class="ui vertical clearing segment doubling stackable three column grid"
+      rt-masonry
+      rt-tag="recipeList"
+      rt-watch="filteredRecipes">
+    <li class="center aligned column"
+        ng-repeat="recipe in vm.recipes
+                   | orderBy: '-created_on'
+                   | filter:{ category: { slug: vm.categoryFilter || undefined, }, }
+                   as filteredRecipes"
+        rt-masonry-item
+        rt-tag="recipeList">
+
+      <!-- Recipe Card -->
+      <article class="ui fluid card">
+        <div class="ui image">
+          <span class="ui large blue ribbon label"
+             ng-bind="recipe.category.label"></span>
+
+          <a ui-sref=".view({ recipeId: recipe._id })">
+            <img ng-src="{{recipe.thumbnail || 'asset/img/recipe-image-placeholder-360x240.png'}}" />
+          </a>
+        </div>
+
+        <div class="content">
+          <h2 class="ui header">
+            <a ui-sref=".view({ recipeId: recipe._id })" ng-bind="recipe.title"></a>
+          </h2>
+          <div class="ui meta">
+            <span>Created on <time datetime="{{::recipe.created_on}}" ng-bind="recipe.created_on | date: 'MM/dd/yyyy @ h:mma'"></time></span>
+          </div>
+
+          <div class="description">
+            <p ng-bind="recipe.description"></p>
+          </div>
+        </div>
+
+        <footer class="extra content">
+          <a class="ui right floated default left icon button"
+             ui-sref=".edit({ recipeId: recipe._id })">
+            <i class="write icon"></i>
+            <span>Edit</span>
+          </a>
+        </footer>
+      </article>
+
+    </li>
+  </section>
+
+</main>

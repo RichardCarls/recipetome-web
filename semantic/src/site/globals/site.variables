@@ -1,0 +1,19 @@
+/*******************************
+     User Global Variables
+*******************************/
+@primaryColor   : #47844b;  // Pepper Stem
+@secondaryColor : #ffd84c;  // Illogical Yellow
+
+@red            : #bf2a23;  // Fuji Red
+@orange         : #f38913;  // Yellow Pepper
+@yellow         : #ffd84c;  // Illogical Yellow
+@olive          : #a6ad3c;  // Fuji Green
+@green          : @primaryColor;
+@teal           : #22adc2;  // I love blue too much
+@blue           : #577aa4;  // Boy's Only blue
+@violet         : #a77ca7;  // Sweater
+@purple         : #ab0768;  // It's all about pink
+@pink           : #f35c9f;  // Two in the pink
+@brown          : #543322;  // Beatville USA
+@grey           : #736f66;  //Old Apartments
+@black          : #373b44;  //Lowlight

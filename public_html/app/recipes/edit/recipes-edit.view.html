@@ -1,0 +1,68 @@
+<form name="form"
+      ng-submit="vm.saveRecipe()"
+      novalidate>
+  <nav class="ui three top attached steps">
+    <a class="step"
+       ui-sref="recipes.edit({ step: '1' })"
+       ui-sref-active="active">
+      <i class="info icon"></i>
+      <span>Basic Info</span>
+      <strong class="ui floating red label"
+              ng-show="form.basicForm.$invalid">!</strong>
+    </a>
+    <a class="step"
+       ui-sref="recipes.edit({ step: '2' })"
+       ui-sref-active="active">
+      <i class="ordered list icon"></i>
+      <span>Ingredients</span>
+      <strong class="ui floating red label"
+              ng-show="form.ingredientsForm.$invalid">!</strong>
+    </a>
+    <a class="step"
+       ui-sref="recipes.edit({ step: '3' })"
+       ui-sref-active="active">
+      <i class="browser icon"></i>
+      <span>Directions</span>
+      <strong class="ui floating red label"
+              ng-show="form.stepsForm.$invalid">!</strong>
+    </a>
+  </nav>
+
+  <div class="ui attached segment">
+    <!-- Basic Info -->
+    <section ng-show="vm.currentWizardStep === '1'"
+             ng-include="'app/recipes/edit/basic-form.template.html'"></section>
+
+    <!-- Ingredients -->
+    <section ng-show="vm.currentWizardStep === '2'"
+             ng-include="'app/recipes/edit/ingredients-form.template.html'"></section>
+
+    <!-- Recipe Steps -->
+    <section ng-show="vm.currentWizardStep === '3'"
+             ng-include="'app/recipes/edit/steps-form.template.html'"></section>
+  </div>
+
+  <!-- Ingredients Button -->
+  <a class="ui large bottom attached secondary button"
+          ui-sref="recipes.edit({ step: '2' })"
+          ng-show="vm.currentWizardStep === '1'">
+    <span>Ingredients</span>
+    <i class="right chevron icon"></i>
+  </a>
+
+  <!-- Directions Button -->
+  <a class="ui large bottom attached secondary button"
+          ui-sref="recipes.edit({ step: '3' })"
+          ng-show="vm.currentWizardStep === '2'">
+    <span>Directions</span>
+    <i class="right chevron icon"></i>
+  </a>
+
+  <!-- Submit Button -->
+  <button class="ui fluid large bottom attached primary submit button"
+          type="submit"
+          ng-show="vm.currentWizardStep === '3'"
+          ng-disabled="form.$invalid">
+    <span>Save</span>
+  </button>
+</form>

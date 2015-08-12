@@ -1,0 +1,103 @@
+<div class="ui form"
+     ng-form="basicForm"
+     name="basicForm">
+  <div class="ui stackable grid">
+    <div class="ui six wide column">
+
+      <!-- Thumbnail Preview -->
+      <div class="ui fluid bordered image">
+        <img ng-src="{{vm.recipe.thumbnail || 'asset/img/recipe-image-placeholder-360x240.png'}}" />
+      </div>
+
+      <!-- Thumbnail -->
+      <div class="field">
+        <label for="thumbnail">Photo</label>
+        <div class="ui action input">
+          <input type="text"
+                 name="thumbnail"
+                 ng-model="vm.recipe.thumbnail"
+                 placeholder="Upload a photo"
+                 upload-field="thumbnailUpload"
+                 action-label="Upload"
+                 action-label-classes="ui button"
+                 on-file-selected="vm.onPictureSelected(files)"
+                 readonly />
+        </div>
+      </div>
+    </div>
+
+    <div class="ui ten wide column">
+      <!-- Title (required) -->
+      <div class="required field">
+        <label for="title">Title</label>
+        <input type="text"
+               name="title"
+               ng-model="vm.recipe.title"
+               placeholder="Title"
+               required autofocus />
+      </div>
+
+      <!-- Description -->
+      <div class="field">
+        <label for="description">Description</label>
+        <textarea name="description"
+               ng-model="vm.recipe.description"
+               placeholder="Description"></textarea>
+      </div>
+
+      <!-- Category -->
+      <div class="field">
+        <label for="category">Category</label>
+        <input type="text"
+               name="category"
+               ng-model="vm.recipe.category.label"
+               ng-change="vm.generateCategorySlug()"
+               placeholder="Category" />
+      </div>
+
+      <div class="ui three fields">
+        <!-- Prep Time -->
+        <div class="field">
+          <label for="prep_time">Prep Time</label>
+          <div class="ui right labeled input">
+            <input type="number"
+                   name="prep_time"
+                   ng-model="vm.recipe.prep_time"
+                   step="any"
+                   min="1" />
+            <div class="ui label">
+              <span>Minutes</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cook Time -->
+        <div class="field">
+          <label for="prep_time">Cook Time</label>
+          <div class="ui right labeled input">
+            <input type="number"
+                   name="cook_time"
+                   ng-model="vm.recipe.cook_time"
+                   step="any"
+                   min="1" />
+            <div class="ui label">
+              <span>Minutes</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Yield Qty -->
+        <div class="field">
+          <label for="yield_qty">Servings</label>
+          <input type="number"
+                 name="yield_qty"
+                 ng-model="vm.recipe.yield_qty"
+                 step="1"
+                 min="1" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

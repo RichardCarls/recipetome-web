@@ -1,0 +1,66 @@
+<div ng-form="stepsForm"
+     name="stepsForm">
+  <div class="ui fluid styled accordion"
+       sv-root
+       sv-part="vm.recipe.steps"
+       sv-on-sort="vm.onStepReorder()">
+    <div sv-element="{ containment: '[sv-root]' }"
+         ng-repeat="step in vm.recipe.steps
+                    | orderBy: 'order'">
+      <!-- Step Line -->
+      <div class="title"
+            ng-class="{ active: step.order === vm.currentStep.order }"
+            ng-click="vm.currentStep.order === step.order ? vm.currentStep = null : vm.currentStep = step">
+        <i class="dropdown icon"></i>
+        <strong>Step {{step.order}}: <small>{{step.summary || (step.directions | limitTo: 35 | append: ' ...') || '(New Step)'}}</small></strong>
+
+        <span style="float: right;" sv-handle>
+          <span>Reorder</span>
+          <i class="move icon"></i>
+        </span>
+
+      </div>
+
+      <!-- Step Form -->
+      <div class="ui form content"
+           ng-class="{ active: step.order === vm.currentStep.order }"
+           ng-form="stepForm"
+           name="stepForm">
+
+        <!-- Summary -->
+        <div class="field">
+          <label for="summary">Summary</label>
+          <input type="text"
+                 name="summary"
+                 ng-model="step.summary"
+                 placeholder="Summary (ex: 'Prep the veggies', 'Make the sauce')" />
+        </div>
+
+        <!-- Directions (required) -->
+        <div class="required field">
+          <label for="directions">Directions</label>
+          <textarea name="directions"
+                    ng-model="step.directions"
+                    placeholder="Directions"
+                    required></textarea>
+        </div>
+
+        <!-- Remove -->
+        <button class="ui negative left icon button"
+                type="button"
+                ng-click="vm.removeStep(step)">
+          <i class="remove icon"></i>
+          <span>Remove</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add -->
+  <a class="ui huge pointing label"
+     ng-click="vm.addStep()">
+    <i class="add icon"></i>
+    <span>Add Step</span>
+  </a>
+
+</div>

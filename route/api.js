@@ -15,7 +15,7 @@ module.exports = (function() {
                   request.headers['x-access-token'];
 
       if(id_token) {
-        jwt.verify(id_token, appConfig.secret, function(error, decoded) {
+        jwt.verify(id_token, appConfig.credentials.key, function(error, decoded) {
           if (error) {
             return response
               .status(403)

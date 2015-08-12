@@ -15,6 +15,7 @@ var config = {
   vendorDir: './public_html/vendor',
   appDir: './public_html/app',
   assetDir: './public_html/asset',
+  semanticDir: './semantic',
 };
 
 /**
@@ -25,9 +26,9 @@ gulp.task('env:dev', function() {
 });
 
 gulp.task('vendorCopy', function() {
-  // Bootstrap fonts
-  gulp.src(config.bowerDir + '/bootstrap/fonts/*')
-    .pipe(gulp.dest(config.assetDir + '/fonts'));
+  // jQuery (for testing)
+  gulp.src(config.bowerDir + '/jquery/dist/jquery.min.js')
+    .pipe(gulp.dest(config.vendorDir + '/jquery'));
 
   // Crypto.js
   gulp.src(config.bowerDir + '/cryptojslib/rollups/md5.js')
@@ -37,11 +38,17 @@ gulp.task('vendorCopy', function() {
   gulp.src(config.bowerDir + '/masonry/dist/masonry.pkgd.min.js')
     .pipe(gulp.dest(config.vendorDir + '/masonry'));
 
+  // Toaster
+  gulp.src(config.bowerDir + '/angularjs-toaster/toaster.min.{js,css}')
+    .pipe(gulp.dest(config.vendorDir + '/angularjs-toaster'));
+
   // Angular and 3rd party module dependencies
   gulp.src(config.bowerDir + '/angular/angular.min.{js,js.map}')
     .pipe(gulp.dest(config.vendorDir + '/angular'));
-  gulp.src(config.bowerDir + '/angular-bootstrap/ui-bootstrap-tpls.min.js')
-    .pipe(gulp.dest(config.vendorDir + '/angular-bootstrap'));
+  gulp.src(config.bowerDir + '/angular-mocks/angular-mocks.js')
+    .pipe(gulp.dest(config.vendorDir + '/angular-mocks'));
+  gulp.src(config.bowerDir + '/angular-animate/angular-animate.min.{js,js.map}')
+    .pipe(gulp.dest(config.vendorDir + '/angular-animate'));
   gulp.src(config.bowerDir + '/angular-ui-router/release/angular-ui-router.min.js')
     .pipe(gulp.dest(config.vendorDir + '/angular-ui-router'));
   gulp.src(config.bowerDir + '/angular-resource/angular-resource.min.{js,js.map}')
@@ -50,23 +57,18 @@ gulp.task('vendorCopy', function() {
     .pipe(gulp.dest(config.vendorDir + '/angular-jwt'));
   gulp.src(config.bowerDir + '/angular-slugify/angular-slugify.js')
     .pipe(gulp.dest(config.vendorDir + '/angular-slugify'));
-  gulp.src(config.bowerDir + '/ng-flow/dist/ng-flow-standalone.min.js')
-    .pipe(gulp.dest(config.vendorDir + '/ng-flow'));
   gulp.src(config.bowerDir + '/angular-sortable-view/src/angular-sortable-view.min.js')
     .pipe(gulp.dest(config.vendorDir + '/angular-sortable-view'));
-  gulp.src(config.bowerDir + '/angular-flash-alert/dist/angular-flash.min.js')
-    .pipe(gulp.dest(config.vendorDir + '/angular-flash-alert'));
 });
 
 var vendorModules = [
-  config.bowerDir + '/angular-bootstrap/ui-bootstrap-tpls.js',
+  config.bowerDir + '/angular-animate/angular-animate.js',
   config.bowerDir + '/angular-ui-router/release/angular-ui-router.js',
   config.bowerDir + '/angular-resource/angular-resource.js',
   config.bowerDir + '/angular-jwt/dist/angular-jwt.js',
   config.bowerDir + '/angular-slugify/angular-slugify.js',
-  config.bowerDir + '/ng-flow/dist/ng-flow-standalone.js',
   config.bowerDir + '/angular-sortable-view/src/angular-sortable-view.js',
-  config.bowerDir + '/angular-flash-alert/dist/angular-flash.js',
+  config.bowerDir + '/angularjs-toaster/toaster.js',
 ];
 
 gulp.task('vendorConcat', function() {
@@ -85,6 +87,7 @@ gulp.task('appConcat', function() {
     .src([
       config.appDir + '/**/*.module.js',
       config.appDir + '/**/*.js',
+      '!' + config.appDir + '/**/*.spec.js',
     ]).pipe(ngAnnotate())
       .pipe(sourcemaps.init())
       .pipe(concat('recipetome.js'))
@@ -92,17 +95,9 @@ gulp.task('appConcat', function() {
       .pipe(gulp.dest(config.webRoot));
 });
 
-gulp.task('styleConcat', function() {
-  return gulp.src(config.assetDir + '/style/recipetome.less')
-    .pipe(less({
-      paths: [config.bowerDir + '/bootstrap/less',],
-    })).pipe(gulp.dest(config.assetDir + '/style'));
-});
-
 gulp.task('watch', function() {
-  gulp.watch(config.assetDir + '/style/**/*.less', ['styleConcat',]);
   gulp.watch(config.appDir + '/**/*.js', ['appConcat',]);
 });
 
-gulp.task('build', ['vendorCopy', 'vendorConcat', 'appConcat', 'styleConcat',]);
+gulp.task('build', ['vendorCopy', 'vendorConcat', 'appConcat',]);
 gulp.task('default', ['build', 'env:dev',]);

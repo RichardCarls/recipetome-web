@@ -1,0 +1,21 @@
+/*******************************
+         Site Overrides
+*******************************/
+.ui.segment.masthead {
+  margin-bottom: 0;
+}
+
+.ui.segment.content {
+  padding: 0;
+}
+
+.ui.segment.welcome {
+  background: @green url('/asset/img/welcome.jpg') center/cover no-repeat;
+
+  & .ui.text.container {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    padding: 1em;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}

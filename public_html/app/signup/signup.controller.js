@@ -20,13 +20,10 @@
   /**
    * @class
    * @param {ui.router.state.$state} $state
-   * @param {flash.Flash} Flash
    * @param {RecipeTome/Services/AuthService} AuthService
    */
-  function SignUpController($state, Flash, AuthService) {
+  function SignUpController($state, toaster, AuthService) {
     var vm = this;
-
-    // TODO: Encrypt password before sending to server
 
     /**
      * Prototype `User` object for signup form.
@@ -51,14 +48,18 @@
         .doLocalRegistration(vm.user)
         .then(function(result) {
           if (result.success) {
-            Flash
-              .create('success', 'Registration successful.');
+            toaster.pop(
+              'success', 'User account created',
+              'Welcome to Recipe Tome!'
+            );
 
             $state
               .go('profile');
           } else {
-            Flash
-              .create('error', result.message);
+            toaster.pop(
+              'error', 'Problem with registration',
+              result.message
+            );
           }
         });
     }

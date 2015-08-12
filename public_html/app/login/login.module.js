@@ -17,8 +17,6 @@
   angular
     .module('recipetome.login', [
       'ui.router',
-      'ui.bootstrap',
-      'flash',
       'services.auth',
     ]);
 

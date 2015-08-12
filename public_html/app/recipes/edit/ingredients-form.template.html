@@ -1,0 +1,89 @@
+<div ng-form="ingredientsForm"
+     name="ingredientsForm">
+  <div class="ui fluid styled accordion"
+       sv-root
+       sv-part="vm.recipe.ingredients"
+       sv-on-sort="vm.onIngredientReorder()">
+    <div sv-element="{ containment: '[sv-root]' }"
+         ng-repeat="ingredient in vm.recipe.ingredients
+                    | orderBy: 'order'">
+      <!-- Ingredient line -->
+      <div class="title"
+            ng-class="{ active: ingredient.order === vm.currentIngredient.order }"
+            ng-click="vm.currentIngredient.order === ingredient.order ? vm.currentIngredient = null : vm.currentIngredient = ingredient">
+        <i class="dropdown icon"></i>
+        <strong ng-bind="ingredient.qty"></strong> <strong ng-bind="ingredient.measure"></strong> <span>{{ingredient.name || '(New Ingredient)'}}</span>{{ingredient.preparation ? ', ' : ''}}<em ng-bind="ingredient.preparation"></em>
+
+        <span style="float: right;" sv-handle>
+          <span>Reorder</span>
+          <i class="move icon"></i>
+        </span>
+
+      </div>
+
+      <!-- Ingredient Form -->
+      <div class="ui form content"
+           ng-class="{ active: ingredient.order === vm.currentIngredient.order }"
+           ng-form="ingredientForm"
+           name="ingredientForm">
+
+        <div class="ui two fields">
+
+          <!-- Qty -->
+          <div class="field">
+            <label for="qty">Quantity</label>
+            <input type="number"
+                   name="qty"
+                   step="any"
+                   min="0.1"
+                   ng-model="ingredient.qty" />
+          </div>
+
+          <!-- Measure -->
+          <div class="field">
+            <label for="measure">Measure</label>
+            <input type="text"
+                   name="measure"
+                   ng-model="ingredient.measure"
+                   placeholder="Measure" />
+          </div>
+        </div>
+
+        <!-- Name (required) -->
+        <div class="required field">
+          <label for="name">Ingredient</label>
+          <input type="text"
+                 name="name"
+                 ng-model="ingredient.name"
+                 placeholder="Ingredient (ex: 'Onion', 'Beef', 'Rotini Pasta')"
+                 required />
+        </div>
+
+        <!-- Preparation -->
+        <div class="field">
+          <label for="preparation">Preparation</label>
+          <input type="text"
+                 name="preparation"
+                 ng-model="ingredient.preparation"
+                 placeholder="Preparation" />
+        </div>
+
+        <!-- Remove -->
+        <button class="ui negative left icon button"
+                type="button"
+                ng-click="vm.removeIngredient(ingredient)">
+          <i class="remove icon"></i>
+          <span>Remove</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add -->
+  <a class="ui huge pointing label"
+     ng-click="vm.addIngredient()">
+    <i class="add icon"></i>
+    <span>Add Ingredient</span>
+  </a>
+
+</div>

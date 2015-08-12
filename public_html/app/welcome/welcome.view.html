@@ -1,39 +1,41 @@
-<div class="jumbotron">
-  <div class="container">
-    <h1 ng-bind="vm.greeting.headline"></h1>
-    <p class="lead" ng-bind="vm.greeting.lead"></p>
-    <a class="btn btn-primary btn-lg" ui-sref="signup">Sign up now to get started</a>
-  </div>
-</div>
+<section class="ui middle aligned center aligned vertical welcome segment">
+  <div class="ui text container">
+    <h1 class="ui huge inverted header">
+      {{::vm.greeting.headline}}
+      <div class="ui inverted sub header" ng-bind="vm.greeting.lead"></div>
+    </h1>
 
-<main class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <h3>Newest Features</h3>
-      <hr />
-      <h4>v0.1.0 - First Beta Release</h4>
-      <ul>
-        <li>User Accounts</li>
-        <li>Sort by Category</li>
-        <li>Photo Upload</li>
-      </ul>
+    <a class="ui huge primary labeled icon button" ui-sref="signup">
+      <i class="add user icon"></i>
+      <span>Sign up now to get started</span>
+    </a>
+  </div>
+</section>
+
+<main class="ui very padded vertical segment">
+  <div class="ui stackable grid container">
+    <div class="six wide column">
+      <h3 class="ui center aligned icon header">
+        <i class="lightning icon"></i>
+        <span class="content">Newest Features</span>
+      </h3>
+      <div class="ui divider"></div>
+      <div class="ui secondary segment" ng-repeat="release in vm.newFeatures">
+        <h4 class="ui header" ng-bind="release.version"></h4>
+        <ul class="ui list">
+          <li ng-repeat="feature in release.features">{{::feature}}</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="col-md-4">
-      <h3>Planned Features</h3>
-      <hr />
-      <h4>v0.2.0</h4>
-      <ul>
-        <li>Login with Google, Facebook, Twitter, Pinterest</li>
-      </ul>
-      <h4>v0.3.0</h4>
-      <ul>
-        <li>Recipe sharing</li>
-        <li>Recipe import/export</li>
-      </ul>
-      <h4>v1.0.0</h4>
-      <ul>
-        <li>Android App</li>
+    <div class="six wide column">
+      <h3 class="ui center aligned icon header">
+        <i class="road icon"></i>
+        <span class="content">Planned Features</span>
+      </h3>
+      <div class="ui divider"></div>
+      <ul class="ui list">
+        <li ng-repeat="feature in vm.todoFeatures">{{::feature}}</li>
       </ul>
     </div>
   </div>

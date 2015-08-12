@@ -18,7 +18,6 @@
 
   angular
     .module('components.usermenu', [
-      'ui.bootstrap',
       'ui.router',
       'services.user',
     ]);

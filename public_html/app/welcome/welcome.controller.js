@@ -30,8 +30,38 @@
      */
     vm.greeting = {
       headline: 'Your Personal Recipe Database',
-      lead: 'Recipe Tome let\'s you create and manage recipes.',
+      lead: 'Recipe Tome lets you create and manage recipes.',
     };
+
+    vm.newFeatures = [
+      {
+        version: 'v0.1.2',
+        features: [
+          'Major UI redesign',
+          'Improved recipe edit form experience',
+        ],
+      },
+      {
+        version: 'v0.1.1',
+        features: [
+          'HTTP over TLS support',
+        ],
+      },
+      {
+        version: 'v0.1.0 - First Beta Release',
+        features: [
+          'User accounts',
+          'Sort by category',
+          'Photo upload',
+        ],
+      },
+    ];
+
+    vm.todoFeatures = [
+      'Login with Google, Facebook, Twitter and Pinterest',
+      'Recipe sharing, import and export',
+      'Android App',
+    ];
   }
 
 })(angular);

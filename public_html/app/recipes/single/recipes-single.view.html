@@ -1,0 +1,111 @@
+<article>
+
+  <div class="ui stackable grid">
+    <aside class="six wide column">
+      <div class="ui fluid card">
+
+        <!-- Thumbnail -->
+        <div class="ui image">
+          <a class="ui large blue ribbon label"
+             ui-sref="^({ category: vm.recipe.category.slug })"
+             ng-bind="vm.recipe.category.label"></a>
+
+          <img ng-src="{{vm.recipe.thumbnail || 'asset/img/recipe-image-placeholder-360x240.png'}}" />
+        </div>
+
+        <div class="content">
+          <figure class="ui three statistics">
+            <!-- Prep Time -->
+            <div class="statistic">
+              <span class="label">Prep</span>
+              <span class="value" ng-bind="vm.recipe.prep_time"></span>
+              <span class="label">Minutes</span>
+            </div>
+
+            <!-- Cook Time -->
+            <div class="statistic">
+              <span class="label">Cook</span>
+              <span class="value" ng-bind="vm.recipe.cook_time"></span>
+              <span class="label">Minutes</span>
+            </div>
+
+            <!-- Yield -->
+            <div class="statistic">
+              <span class="label">Yield</span>
+              <span class="value" ng-bind="vm.recipe.yield_qty"></span>
+              <span class="label">Servings</span>
+            </div>
+          </figure>
+        </div>
+
+        <div class="extra content">
+          <!-- Ingredient List -->
+          <h4 class="ui small header">What you'll need</h4>
+          <div class="ui horizontal list">
+            <span class="item"
+                ng-repeat="ingredient in vm.recipe.ingredients">
+              <span ng-bind="ingredient.name"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="ten wide column">
+      <header>
+        <div class="ui basic vertical segment">
+          <h1 class="ui huge header" ng-bind="vm.recipe.title"></h1>
+
+          <p class="ui description" ng-bind="vm.recipe.description"></p>
+        </div>
+      </header>
+
+      <!-- Ingredients -->
+      <section class="ui basic vertical segment">
+        <h3 class="ui heading">Ingredients</h3>
+        <div class="ui large relaxed divided list">
+          <div class="item"
+              ng-repeat="ingredient in vm.recipe.ingredients">
+            <span>
+              <strong ng-bind="ingredient.qty"></strong> <strong ng-bind="ingredient.measure"></strong> <span ng-bind="ingredient.name"></span>{{ingredient.preparation ? ', ' : ''}}<em ng-bind="ingredient.preparation"></em>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Directions -->
+      <section class="ui basic vertical segment">
+        <h3 class="ui heading">Directions</h3>
+        <div class="ui large relaxed divided list">
+          <div class="item"
+              ng-repeat="step in vm.recipe.steps">
+            <h4 class="ui small heading">
+              <span>Step {{::step.order}}: <small ng-bind="step.summary"></small></span>
+            </h4>
+            <p class="description" ng-bind="step.directions"></p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer class="ui basic clearing vertical segment">
+
+    <div class="ui right floated buttons">
+      <!-- Edit button -->
+      <a class="ui left icon button"
+         ui-sref="^.edit({ recipeId: vm.recipe._id })">
+        <i class="write icon"></i>
+        <span>Edit</span>
+      </a>
+
+      <!-- Delete Button -->
+      <button class="ui negative left icon button"
+              ng-click="vm.deleteRecipe()">
+        <i class="remove icon"></i>
+        <span>Delete</span>
+      </button>
+    </div>
+
+  </footer>
+</article>

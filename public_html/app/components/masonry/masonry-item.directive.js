@@ -36,14 +36,26 @@
      * @param  {Object} attrs
      */
     function link(scope, element, attrs) {
-      $timeout(function() {
-        // Wait for jQLite .ready() to ensure images are loaded
-        element.ready(function() {
+      announce();
+
+      // Fix for items containing ng-include directive(s)
+      scope.$on('$includeContentLoaded', announce);
+
+
+      function announce() {
+        var img = element.find('img');
+        if (img.length !== 0) {
+          // Wait for images to load
+          img.bind('load', function() {
+            scope
+              .$emit(attrs.rtTag || 'masonry-item-added', element, false);
+          });
+        } else {
           scope
             .$emit(attrs.rtTag || 'masonry-item-added', element, false);
-        });
-      });
+        }
+      }
     }
   }
-  
+
 })(angular);

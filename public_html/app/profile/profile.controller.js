@@ -24,7 +24,7 @@
    * @param {Recipetome/Services/UserService} UserService
    * @param {Object} user
    */
-  function ProfileController($state, Flash, UserService, user) {
+  function ProfileController($state, toaster, UserService, user) {
     var vm = this;
 
     /**
@@ -39,21 +39,19 @@
      */
     vm.gravatarImage = UserService.getGravatarAvatarUrl();
 
-    // TODO: Encrypt user password(s) before sending to server
-
     /**
      * Prototype credentials object for profile edit form.
      *
      * @type {Object}
      */
     vm.credentials = {
-      email: '',
+      email: user.email,
       password: '',
       current_password: '',
     };
 
     // ---
-    vm.updateCredentials = UserService.updateCredentials;
+    vm.updateCredentials = updateCredentials;
     vm.doUnregister = doUnregister;
     // ---
 
@@ -67,14 +65,18 @@
         .updateCredentials(credentials)
           .then(function(result) {
             if (result.success) {
-              Flash
-                .create('success', 'Credentials updated.');
+              toaster.pop(
+                'success', 'Credentials updated',
+                'Successfully updated your profile information.'
+              );
 
               $state
-                .go('profile', {}, { refresh: true, });
+                .go('profile', {}, { reload: true, });
             } else {
-              Flash
-                .create('error', result.message);
+              toaster.pop(
+                'error', 'Problem updating credentials',
+                result.message
+              );
             }
           });
     }
@@ -89,14 +91,18 @@
         .unregister()
         .then(function(result) {
           if (result.success) {
-            Flash
-              .create('success', 'Unregistration successful.');
+            toaster.pop(
+              'success', 'Your account has been deleted',
+              'Thanks for using Recipe Tome!'
+            );
 
             $state
               .go('welcome');
           } else {
-            Flash
-              .create('error', result.message);
+            toaster.pop(
+              'error', 'Problem with unregistration',
+              result.message
+            );
           }
         });
     }

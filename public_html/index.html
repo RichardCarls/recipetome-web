@@ -7,7 +7,8 @@
 
     <title>Recipe Tome</title>
 
-    <link rel="stylesheet" type="text/css" href="asset/style/recipetome.css" />
+    <link rel="stylesheet" type="text/css" href="asset/semantic/semantic.min.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/angularjs-toaster/toaster.min.css" />
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
     <script type="text/javascript">
@@ -21,40 +22,37 @@
     <![endif]-->
   </head>
 
-  <body ng-controller="RecipeTomeController as appCtrl" flow-prevent-drop>
-    <div class="page-wrap">
-      <header class="navbar navbar-default navbar-static-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <div class="navbar-header">
-              <a class="navbar-brand" ui-sref="welcome">Recipe Tome</a>
-            </div>
-            <nav user-menu>
-            </nav>
-          </div>
-        </div>
-      </header>
+  <body ng-controller="RecipeTomeController as appCtrl"
+        flow-prevent-drop>
 
-      <!-- Flash Messages -->
-      <div flash-message="3000"></div>
+    <header class="ui green inverted vertical masthead segment">
+      <div class="ui container">
+        <nav user-menu>
+        </nav>
+      </div>
+    </header>
 
-      <div ui-view></div>
-    </div>
+    <toaster-container toaster-options="{
+        'position-class': 'toast-bottom-right'
+      }"></toaster-container>
 
-    <footer class="site-footer">
-      <div class="container">
-        <p class="text-center">
-          <span>Recipe Tome v0.1.0 &nbsp;|&nbsp; &copy; 2015 <a href="http://www.richardcarls.com">Richard Carls</a></span>
+    <div class="ui vertical content segment" ui-view></div>
+
+    <footer class="ui center aligned basic segment">
+      <div class="ui container">
+        <p>
+          <span>Recipe Tome {{::appCtrl.version}} &nbsp;|&nbsp; &copy; 2015 <a href="http://www.richardcarls.com">Richard Carls</a></span>
         </p>
-        <p class="text-center">
+        <p>
           <span>Code licensed under <a href="https://github.com/RichardCarls/recipetome-web/blob/master/LICENSE">MIT</a> License</span>
         </p>
-        <p class="text-center">
+        <p>
           <span>Powered by </span>
           <span ng-repeat="tech in appCtrl.techList"><a ng-href="tech.link">{{::tech.name}}</a>{{$last ? '' : ', '}}</span>
         </p>
       </div>
     </footer>
+
 
     <script type="text/javascript" async="true" src="vendor/cryptojslib/rollups/md5.js"></script>
     <script type="text/javascript" async="true"  src="vendor/masonry/masonry.pkgd.min.js"></script>
